@@ -15,10 +15,9 @@ public class LifeControl extends JPanel {
     private LifeGrid grid;
     private JButton save, load, step, clear, run;
     private JButton red, orange, yellow, green, blue, purple, teal;
-    private JLabel generationCounter;
     private JFileChooser fileChooser;
     private int generationNum = 0;
-    private Timer timer = new Timer(50, new TimerListener());
+    private Timer timer = new Timer(250, new TimerListener());
     private static final Color GRAY = new Color(100, 100, 100);
     private static final Color TEAL = new Color(0, 250, 200);
     private static final Color PURPLE = new Color(182, 66, 244);
@@ -134,11 +133,6 @@ public class LifeControl extends JPanel {
         purple.addActionListener(new BtnListener());
         purple.setActionCommand("purple");
         add(purple);
-
-        generationCounter = new JLabel("");
-        generationCounter.setFont(new Font("Century Gothic", Font.PLAIN, 12));
-        generationCounter.setForeground(TEAL);
-        add(generationCounter);
     }
 
     class BtnListener implements ActionListener {
@@ -164,19 +158,19 @@ public class LifeControl extends JPanel {
                         grid.load(selectedFile);
                     }
                     generationNum = 0;
-                    generationCounter.setText("");
+                    GUI.changeGenCounter("");
                     break;
                 case "step":
                     grid.step();
                     generationNum++;
-                    generationCounter.setText("Generation: " + generationNum);
+                    GUI.changeGenCounter("Generation: " + generationNum);
                     System.out.println("Single Step Taken");
                     break;
                 case "clear":
                     grid.clear();
                     System.out.println("Grid Cleared");
                     generationNum = 0;
-                    generationCounter.setText("");
+                    GUI.changeGenCounter("");
                     break;
                 case "run":
                     timer.start();
@@ -235,11 +229,11 @@ public class LifeControl extends JPanel {
                     run.setActionCommand("run");
                     System.out.println("Timer Running: " + timer.isRunning());
                     generationNum = 999;
-                    generationCounter.setText("Generation: 999+");
+                    GUI.changeGenCounter("Generation: 999+");
                 } else {
                     grid.step();
                     generationNum++;
-                    generationCounter.setText("Generation: " + generationNum);  
+                    GUI.changeGenCounter("Generation: " + generationNum);
                 }
                 GUI.pack();
             } else {

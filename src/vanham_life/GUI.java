@@ -14,11 +14,13 @@ public class GUI {
     private static LifeGrid gameGrid = new LifeGrid();
     private static Logo logo = new Logo();
     private static LifeControl gameControl = new LifeControl(gameGrid);
+    private static JLabel genCount = new JLabel(" ");
     private static JPanel right = new JPanel();
     private static JFrame frame = new JFrame("LIFE");
+    private static final Color TEAL = new Color(0, 250, 200);
 
     private static void createAndShowGui() {
-        
+
         frame.setIconImage(imageIcon.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -27,6 +29,9 @@ public class GUI {
         right.setLayout(new BoxLayout(right, BoxLayout.Y_AXIS));
         right.add(logo);
         right.add(gameControl);
+        genCount.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        genCount.setForeground(TEAL);
+        right.add(genCount);
         right.setOpaque(false);
         contentPane.add(right);
         frame.setResizable(false);
@@ -35,9 +40,13 @@ public class GUI {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-    
+
     public static void pack() {
         frame.pack();
+    }
+
+    public static void changeGenCounter(String text) {
+        genCount.setText(text);
     }
 
     public static void main(String[] args) {
