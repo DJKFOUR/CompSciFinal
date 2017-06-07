@@ -237,10 +237,11 @@ public class LifeControl extends JPanel {
                     generationNum = 999;
                     generationCounter.setText("Generation: 999+");
                 } else {
-                  grid.step();
-                generationNum++;
-                generationCounter.setText("Generation: " + generationNum);  
+                    grid.step();
+                    generationNum++;
+                    generationCounter.setText("Generation: " + generationNum);  
                 }
+                GUI.pack();
             } else {
                 timer.stop();
                 run.setText("Run");

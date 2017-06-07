@@ -9,15 +9,16 @@ import javax.swing.*;
  */
 public class GUI {
 
-    private static void createAndShowGui() {
-        ImageIcon imageIcon = new ImageIcon("logo.png");
-        JPanel contentPane = new JPanel();
-        LifeGrid gameGrid = new LifeGrid();
-        Logo logo = new Logo();
-        LifeControl gameControl = new LifeControl(gameGrid);
-        JPanel right = new JPanel();
+    private static ImageIcon imageIcon = new ImageIcon("logo.png");
+    private static JPanel contentPane = new JPanel();
+    private static LifeGrid gameGrid = new LifeGrid();
+    private static Logo logo = new Logo();
+    private static LifeControl gameControl = new LifeControl(gameGrid);
+    private static JPanel right = new JPanel();
+    private static JFrame frame = new JFrame("LIFE");
 
-        JFrame frame = new JFrame("LIFE");
+    private static void createAndShowGui() {
+        
         frame.setIconImage(imageIcon.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -28,11 +29,15 @@ public class GUI {
         right.add(gameControl);
         right.setOpaque(false);
         contentPane.add(right);
-        frame.setResizable(true);
+        frame.setResizable(false);
         frame.add(contentPane);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+    
+    public static void pack() {
+        frame.pack();
     }
 
     public static void main(String[] args) {
