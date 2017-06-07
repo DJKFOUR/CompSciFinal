@@ -11,7 +11,8 @@ import javax.swing.*;
  * @author Kyle
  */
 public class LifeGrid extends JPanel {
-
+    
+    private static int gameSize = 20;
     private static final int RECT_WIDTH = 20;
     private static final int RECT_HEIGHT = RECT_WIDTH;
     private int gridSize;
@@ -20,7 +21,7 @@ public class LifeGrid extends JPanel {
     private Life game;
 
     public LifeGrid() {
-        game = new Life(20);
+        game = new Life(gameSize);
         gridSize = game.getSize();
         setBackground(Color.BLACK);
         addMouseListener(new MouseAdapter() {

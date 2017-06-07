@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.*;
+import javax.swing.filechooser.*;
 
 /**
  *
@@ -16,6 +17,7 @@ public class LifeControl extends JPanel {
     private JButton save, load, step, clear, run;
     private JButton red, orange, yellow, green, blue, purple, teal;
     private JFileChooser fileChooser;
+    private FileFilter filter = new FileNameExtensionFilter("Life file", new String[]{"life"});//////
     private int generationNum = 0;
     private Timer timer = new Timer(250, new TimerListener());
     private static final Color GRAY = new Color(100, 100, 100);
@@ -144,14 +146,27 @@ public class LifeControl extends JPanel {
             switch (whichBtn) {
                 case "save":
                     fileChooser = new JFileChooser();
-                    returnValue = fileChooser.showOpenDialog(null);
+                    fileChooser.setFileFilter(filter);
+                    fileChooser.addChoosableFileFilter(filter);
+                    fileChooser.setAcceptAllFileFilterUsed(false);
+                    returnValue = fileChooser.showSaveDialog(null);
                     if (returnValue == JFileChooser.APPROVE_OPTION) {
                         File selectedFile = fileChooser.getSelectedFile();
+
+                        String fileName = selectedFile.getName();
+                        if (!fileName.endsWith(".Life")) {
+                            fileName += ".Life";
+                            selectedFile.renameTo(new File(fileName));
+                        }
+                        
                         grid.save(selectedFile);
                     }
                     break;
                 case "load":
                     fileChooser = new JFileChooser();
+                    fileChooser.setFileFilter(filter);
+                    fileChooser.addChoosableFileFilter(filter);
+                    fileChooser.setAcceptAllFileFilterUsed(false);
                     returnValue = fileChooser.showOpenDialog(null);
                     if (returnValue == JFileChooser.APPROVE_OPTION) {
                         File selectedFile = fileChooser.getSelectedFile();
