@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import javax.swing.*;
 import javax.swing.filechooser.*;
 
@@ -153,13 +154,22 @@ public class LifeControl extends JPanel {
                     if (returnValue == JFileChooser.APPROVE_OPTION) {
                         File selectedFile = fileChooser.getSelectedFile();
 
+                        File temp;
                         String fileName = selectedFile.getName();
                         if (!fileName.endsWith(".Life")) {
                             fileName += ".Life";
-                            selectedFile.renameTo(new File(fileName));
+                            temp = new File(fileName);
+                            try {
+                                temp.createNewFile();
+                            } catch (IOException e) {
+                                System.out.println("Problem reading file.");
+                                System.err.println("IOException: " + e.getMessage());
+                            }
+                            grid.save(temp);
+                        } else {
+                            grid.save(selectedFile);
                         }
-                        
-                        grid.save(selectedFile);
+
                     }
                     break;
                 case "load":
