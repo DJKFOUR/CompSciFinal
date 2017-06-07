@@ -11,7 +11,7 @@ import javax.swing.*;
  * @author Kyle
  */
 public class LifeControl extends JPanel {
-    
+
     private LifeGrid grid;
     private JButton save, load, step, clear, run;
     private JButton red, orange, yellow, green, blue, purple, teal;
@@ -27,6 +27,7 @@ public class LifeControl extends JPanel {
         this.grid = grid;
 
         setLayout(new GridLayout(0, 2, 10, 10));
+        setOpaque(false);
 
         save = new JButton("Save");
         save.setFont(new Font("Century Gothic", Font.PLAIN, 12));
@@ -138,8 +139,6 @@ public class LifeControl extends JPanel {
         generationCounter.setFont(new Font("Century Gothic", Font.PLAIN, 12));
         generationCounter.setForeground(TEAL);
         add(generationCounter);
-
-        setOpaque(false);
     }
 
     class BtnListener implements ActionListener {
@@ -223,13 +222,25 @@ public class LifeControl extends JPanel {
     }
 
     class TimerListener implements ActionListener {
-        
+
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!grid.isEmpty()) {
-                grid.step();
+                if (generationNum > 999) {
+                    timer.stop();
+                    run.setText("Run");
+                    run.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+                    run.setBackground(GRAY);
+                    run.setForeground(TEAL);
+                    run.setActionCommand("run");
+                    System.out.println("Timer Running: " + timer.isRunning());
+                    generationNum = 999;
+                    generationCounter.setText("Generation: 999+");
+                } else {
+                  grid.step();
                 generationNum++;
-                generationCounter.setText("Generation: " + generationNum);
+                generationCounter.setText("Generation: " + generationNum);  
+                }
             } else {
                 timer.stop();
                 run.setText("Run");

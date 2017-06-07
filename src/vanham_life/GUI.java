@@ -28,7 +28,7 @@ public class GUI {
         right.add(gameControl);
         right.setOpaque(false);
         contentPane.add(right);
-        
+        frame.setResizable(true);
         frame.add(contentPane);
         frame.pack();
         frame.setLocationRelativeTo(null);
