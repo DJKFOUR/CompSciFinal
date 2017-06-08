@@ -6,8 +6,8 @@ import java.awt.event.*;
 public class GenerationRating implements ActionListener {
     private static JFrame frame;
     private static JPanel contentPane;
-    private static JLabel label;
-    private static JButton button;
+    private static JLabel list;
+    private static JButton load,rate;
 
     public GenerationRating() {
         
@@ -16,13 +16,20 @@ public class GenerationRating implements ActionListener {
         
         contentPane = new JPanel();
         
-        label = new JLabel("Click the button plz");
-        contentPane.add(label);
+        load = new JButton("Load a file");
+        load.addActionListener(this);
+        load.setActionCommand("load");
+        contentPane.add(load);
         
-        button = new JButton("Rate Generations");
-        button.addActionListener(this);
-        button.setActionCommand("rate");
-        contentPane.add(button);
+        rate = new JButton("Rate Generations");
+        rate.addActionListener(this);
+        rate.setActionCommand("rate");
+        contentPane.add(rate);
+        
+        list = new JLabel("Click the button plz");
+        contentPane.add(list);
+        
+        
         
         frame.setContentPane(contentPane);
         
@@ -37,13 +44,22 @@ public class GenerationRating implements ActionListener {
      * clicked.
      */
     @Override
-    public void actionPerformed(ActionEvent e) {
-        String whichBtn = e.getActionCommand();
-        
-        if (whichBtn.equals("rate")) {
-            label.setText("Print list of generations in order");
+        public void actionPerformed(ActionEvent event) {
+            String whichBtn = event.getActionCommand();
+            
+            switch (whichBtn) {
+                case "load":
+                    
+                    break;
+                case "rate":
+                    //run the file and store each generation in an arraylist
+                    //until all cells are dead or 999+ is reached
+                    
+                    //STILL NEED TO DETERMINE WHETER A SOLID STATE WILL EXIST IN BOTH APPLICAIONS
+                    
+                    break;
         }
-        frame.pack(); //resize frame to fit button as it grows in size
+        frame.pack(); //resize frame to fit elements as they grow in size
     }
 
     /**
