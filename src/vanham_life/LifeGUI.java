@@ -8,7 +8,7 @@ import javax.swing.*;
  *
  * @author Kyle
  */
-public class GUI {
+public class LifeGUI {
 
     private static ImageIcon imageIcon = new ImageIcon("logo.png");
     private static JPanel contentPane = new JPanel();
@@ -24,6 +24,7 @@ public class GUI {
 
         frame.setIconImage(imageIcon.getImage());
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent winEvt) {
                 LifeGrid.deleteTemp();
                 System.exit(0);

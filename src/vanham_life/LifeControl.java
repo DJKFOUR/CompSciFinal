@@ -183,19 +183,19 @@ public class LifeControl extends JPanel {
                         grid.load(selectedFile);
                     }
                     generationNum = 0;
-                    GUI.changeGenCounter("");
+                    LifeGUI.changeGenCounter("");
                     break;
                 case "step":
                     grid.step();
                     generationNum++;
-                    GUI.changeGenCounter("Generation: " + generationNum);
+                    LifeGUI.changeGenCounter("Generation: " + generationNum);
                     System.out.println("Single Step Taken");
                     break;
                 case "clear":
                     grid.clear();
                     recall.hide();
                     generationNum = 0;
-                    GUI.changeGenCounter("");
+                    LifeGUI.changeGenCounter("");
                     System.out.println("Grid Cleared");
                     break;
                 case "run":
@@ -221,6 +221,8 @@ public class LifeControl extends JPanel {
                     break;
                 case "recall":
                     grid.load(new File("temp.LifeTemp"));
+                    generationNum = 0;
+                    LifeGUI.changeGenCounter("");
                     break;
                 case "red":
                     grid.setColour(Color.RED);
@@ -262,13 +264,13 @@ public class LifeControl extends JPanel {
                     run.setActionCommand("run");
                     System.out.println("Timer Running: " + timer.isRunning());
                     generationNum = 999;
-                    GUI.changeGenCounter("Generation: 999+");
+                    LifeGUI.changeGenCounter("Generation: 999+");
                 } else {
                     grid.step();
                     generationNum++;
-                    GUI.changeGenCounter("Generation: " + generationNum);
+                    LifeGUI.changeGenCounter("Generation: " + generationNum);
                 }
-                GUI.pack();
+                LifeGUI.pack();
             } else {
                 timer.stop();
                 recall.show();
