@@ -15,10 +15,10 @@ import javax.swing.filechooser.*;
 public class LifeControl extends JPanel {
 
     private LifeGrid grid;
-    private JButton save, load, step, clear, run;
+    private JButton save, load, step, clear, run, recall; //////////////////////////////////////////////////////////
     private JButton red, orange, yellow, green, blue, purple, teal;
     private JFileChooser fileChooser;
-    private FileFilter filter = new FileNameExtensionFilter("Life file", new String[]{"life"});//////
+    private FileFilter filter = new FileNameExtensionFilter("Life file", new String[]{"life"});
     private int generationNum = 0;
     private Timer timer = new Timer(250, new TimerListener());
     private static final Color GRAY = new Color(100, 100, 100);
@@ -61,7 +61,7 @@ public class LifeControl extends JPanel {
         step.setActionCommand("step");
         add(step);
 
-        clear = new JButton("Clear Grid");
+        clear = new JButton("Clear Grid(RESET)");
         clear.setFont(new Font("Century Gothic", Font.PLAIN, 12));
         clear.setBackground(GRAY);
         clear.setForeground(TEAL);
@@ -80,6 +80,17 @@ public class LifeControl extends JPanel {
         run.addActionListener(new BtnListener());
         run.setActionCommand("run");
         add(run);
+        
+        recall = new JButton("Recall");
+        recall.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        recall.setBackground(GRAY);
+        recall.setForeground(TEAL);
+        recall.setBorderPainted(false);
+        recall.setFocusPainted(false);
+        recall.addActionListener(new BtnListener());
+        recall.setActionCommand("recall");
+        recall.hide();
+        add(recall);
 
         red = new JButton("");
         red.setBackground(Color.RED);
@@ -182,12 +193,15 @@ public class LifeControl extends JPanel {
                     break;
                 case "clear":
                     grid.clear();
-                    System.out.println("Grid Cleared");
+                    recall.hide();////////////////////////////////////////////////////////////////////////
                     generationNum = 0;
                     GUI.changeGenCounter("");
+                    System.out.println("Grid Cleared");
                     break;
                 case "run":
                     timer.start();
+                    grid.save(new File("temp.LifeTemp"));//////////////////////////////////////////////////////////
+                    recall.hide();////////////////////////////////////////////////////////////////////////
                     run.setText("STOP");
                     run.setFont(new Font("Century Gothic", Font.BOLD, 12));
                     run.setBackground(Color.RED);
@@ -196,6 +210,7 @@ public class LifeControl extends JPanel {
                     System.out.println("Timer Running: " + timer.isRunning());
                     break;
                 case "stop":
+                    recall.show();
                     timer.stop();
                     run.setText("Run");
                     run.setFont(new Font("Century Gothic", Font.PLAIN, 12));
@@ -203,6 +218,9 @@ public class LifeControl extends JPanel {
                     run.setForeground(TEAL);
                     run.setActionCommand("run");
                     System.out.println("Timer Running: " + timer.isRunning());
+                    break;
+                case "recall":
+                    grid.load(new File("temp.LifeTemp"));
                     break;
                 case "red":
                     grid.setColour(Color.RED);
