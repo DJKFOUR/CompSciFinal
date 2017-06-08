@@ -15,7 +15,7 @@ import javax.swing.filechooser.*;
 public class LifeControl extends JPanel {
 
     private LifeGrid grid;
-    private JButton save, load, step, clear, run, recall; //////////////////////////////////////////////////////////
+    private JButton save, load, step, clear, run, recall;
     private JButton red, orange, yellow, green, blue, purple, teal;
     private JFileChooser fileChooser;
     private FileFilter filter = new FileNameExtensionFilter("Life file", new String[]{"life"});
@@ -193,15 +193,15 @@ public class LifeControl extends JPanel {
                     break;
                 case "clear":
                     grid.clear();
-                    recall.hide();////////////////////////////////////////////////////////////////////////
+                    recall.hide();
                     generationNum = 0;
                     GUI.changeGenCounter("");
                     System.out.println("Grid Cleared");
                     break;
                 case "run":
                     timer.start();
-                    grid.save(new File("temp.LifeTemp"));//////////////////////////////////////////////////////////
-                    recall.hide();////////////////////////////////////////////////////////////////////////
+                    grid.save(new File("temp.LifeTemp"));
+                    recall.hide();
                     run.setText("STOP");
                     run.setFont(new Font("Century Gothic", Font.BOLD, 12));
                     run.setBackground(Color.RED);
@@ -254,6 +254,7 @@ public class LifeControl extends JPanel {
             if (!grid.isEmpty()) {
                 if (generationNum > 999) {
                     timer.stop();
+                    recall.show();
                     run.setText("Run");
                     run.setFont(new Font("Century Gothic", Font.PLAIN, 12));
                     run.setBackground(GRAY);
@@ -270,6 +271,7 @@ public class LifeControl extends JPanel {
                 GUI.pack();
             } else {
                 timer.stop();
+                recall.show();
                 run.setText("Run");
                 run.setFont(new Font("Century Gothic", Font.PLAIN, 12));
                 run.setBackground(GRAY);

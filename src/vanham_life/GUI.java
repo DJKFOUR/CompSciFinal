@@ -1,6 +1,7 @@
 package vanham_life;
 
 import java.awt.*;
+import java.awt.event.WindowEvent;
 import javax.swing.*;
 
 /**
@@ -22,7 +23,12 @@ public class GUI {
     private static void createAndShowGui() {
 
         frame.setIconImage(imageIcon.getImage());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(WindowEvent winEvt) {
+                LifeGrid.deleteTemp();
+                System.exit(0);
+            }
+        });
         frame.setResizable(false);
         contentPane.setBackground(new Color(50, 50, 50));
         contentPane.add(gameGrid);
