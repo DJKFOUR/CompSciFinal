@@ -92,6 +92,7 @@ public class LifeGrid extends JPanel {
     public void save(File f) {
         try {
             File lifeFile = f;
+            
             /* write objects */
             FileOutputStream out = new FileOutputStream(lifeFile);
             ObjectOutputStream writeLife = new ObjectOutputStream(out);
@@ -116,11 +117,12 @@ public class LifeGrid extends JPanel {
     public void load(File f) {
         try {
             File lifeFile = f;
+            
             /* read objects */
             FileInputStream in = new FileInputStream(lifeFile);
             ObjectInputStream readLife = new ObjectInputStream(in);
 
-            game = (Life) readLife.readObject();
+            game = (Life)readLife.readObject();
 
             readLife.close();
             in.close();

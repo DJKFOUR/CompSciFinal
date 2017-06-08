@@ -153,23 +153,15 @@ public class LifeControl extends JPanel {
                     returnValue = fileChooser.showSaveDialog(null);
                     if (returnValue == JFileChooser.APPROVE_OPTION) {
                         File selectedFile = fileChooser.getSelectedFile();
-
-                        File temp;
-                        String fileName = selectedFile.getName();
+                        String fileName = selectedFile.getAbsolutePath();
+                        
                         if (!fileName.endsWith(".Life")) {
-                            fileName += ".Life";
-                            temp = new File(fileName);
-                            try {
-                                temp.createNewFile();
-                            } catch (IOException e) {
-                                System.out.println("Problem reading file.");
-                                System.err.println("IOException: " + e.getMessage());
-                            }
-                            grid.save(temp);
-                        } else {
-                            grid.save(selectedFile);
+                           fileName = selectedFile.getAbsolutePath() + ".Life";
                         }
+                        
+                        File saveFile = new File(fileName); 
 
+                        grid.save(saveFile);
                     }
                     break;
                 case "load":
