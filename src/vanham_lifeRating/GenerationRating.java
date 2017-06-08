@@ -1,4 +1,4 @@
-package vanham_life;
+package vanham_lifeRating;
 
 import javax.swing.*;
 import java.awt.event.*;
