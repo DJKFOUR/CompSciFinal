@@ -154,13 +154,10 @@ public class LifeControl extends JPanel {
                     if (returnValue == JFileChooser.APPROVE_OPTION) {
                         File selectedFile = fileChooser.getSelectedFile();
                         String fileName = selectedFile.getAbsolutePath();
-                        
                         if (!fileName.endsWith(".Life")) {
                            fileName = selectedFile.getAbsolutePath() + ".Life";
                         }
-                        
-                        File saveFile = new File(fileName); 
-
+                        File saveFile = new File(fileName);
                         grid.save(saveFile);
                     }
                     break;
