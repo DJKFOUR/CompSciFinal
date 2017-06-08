@@ -37,6 +37,7 @@ public class LifeGrid extends JPanel {
                     System.out.println(x + "," + y + ": Alive");
                 }
                 repaint();
+                save(new File("temp.LifeTemp"));
             }
         });
     }

@@ -193,14 +193,12 @@ public class LifeControl extends JPanel {
                     break;
                 case "clear":
                     grid.clear();
-                    recall.hide();
                     generationNum = 0;
                     LifeGUI.changeGenCounter("");
                     System.out.println("Grid Cleared");
                     break;
                 case "run":
                     timer.start();
-                    grid.save(new File("temp.LifeTemp"));
                     recall.hide();
                     run.setText("STOP");
                     run.setFont(new Font("Century Gothic", Font.BOLD, 12));
