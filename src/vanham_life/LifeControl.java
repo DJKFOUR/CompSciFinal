@@ -61,7 +61,7 @@ public class LifeControl extends JPanel {
         step.setActionCommand("step");
         add(step);
 
-        clear = new JButton("Clear Grid(RESET)");
+        clear = new JButton("Clear Grid");
         clear.setFont(new Font("Century Gothic", Font.PLAIN, 12));
         clear.setBackground(GRAY);
         clear.setForeground(TEAL);
@@ -89,7 +89,7 @@ public class LifeControl extends JPanel {
         recall.setFocusPainted(false);
         recall.addActionListener(new BtnListener());
         recall.setActionCommand("recall");
-        recall.hide();
+        recall.setVisible(false);
         add(recall);
 
         red = new JButton("");
@@ -183,7 +183,7 @@ public class LifeControl extends JPanel {
                         grid.load(selectedFile);
                     }
                     generationNum = 0;
-                    LifeGUI.changeGenCounter("");
+                    LifeGUI.changeGenCounter(" ");
                     break;
                 case "step":
                     grid.step();
@@ -194,12 +194,12 @@ public class LifeControl extends JPanel {
                 case "clear":
                     grid.clear();
                     generationNum = 0;
-                    LifeGUI.changeGenCounter("");
+                    LifeGUI.changeGenCounter(" ");
                     System.out.println("Grid Cleared");
                     break;
                 case "run":
                     timer.start();
-                    recall.hide();
+                    recall.setVisible(false);
                     run.setText("STOP");
                     run.setFont(new Font("Century Gothic", Font.BOLD, 12));
                     run.setBackground(Color.RED);
@@ -220,7 +220,7 @@ public class LifeControl extends JPanel {
                 case "recall":
                     grid.load(new File("temp.LifeTemp"));
                     generationNum = 0;
-                    LifeGUI.changeGenCounter("");
+                    LifeGUI.changeGenCounter(" ");
                     break;
                 case "red":
                     grid.setColour(Color.RED);
@@ -254,7 +254,7 @@ public class LifeControl extends JPanel {
             if (!grid.isEmpty()) {
                 if (generationNum > 999) {
                     timer.stop();
-                    recall.show();
+                    recall.setVisible(true);
                     run.setText("Run");
                     run.setFont(new Font("Century Gothic", Font.PLAIN, 12));
                     run.setBackground(GRAY);
@@ -271,7 +271,7 @@ public class LifeControl extends JPanel {
                 LifeGUI.pack();
             } else {
                 timer.stop();
-                recall.show();
+                recall.setVisible(true);
                 run.setText("Run");
                 run.setFont(new Font("Century Gothic", Font.PLAIN, 12));
                 run.setBackground(GRAY);
