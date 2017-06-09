@@ -1,5 +1,6 @@
 package vanham_lifeRating;
 
+import java.awt.GridLayout;
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -11,10 +12,11 @@ public class GenerationRating implements ActionListener {
 
     public GenerationRating() {
         
-        frame = new JFrame("Button Example");
+        frame = new JFrame("Life File Generation Rating");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         contentPane = new JPanel();
+        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
         
         load = new JButton("Load a file");
         load.addActionListener(this);
