@@ -176,4 +176,16 @@ public class LifeGrid extends JPanel {
             TEMP.delete();
         }
     }
+    
+    public int countPopulation() {
+        int population = 0;
+        for (int row = 0; row < gameSize; row++) {
+            for (int col = 0; col < gameSize; col++) {
+                if (game.getCell(row, col) == 1) {
+                    population++;
+                }
+            }
+        }
+        return population;
+    }
 }
