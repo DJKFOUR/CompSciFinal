@@ -33,7 +33,8 @@ public class Generation implements Comparable{
         }
     }
     
+    @Override
     public String toString() {
-        return "Generation " + generationNum + ": " + population;
+        return "G=" + generationNum + "P=" + population;
     }
 }

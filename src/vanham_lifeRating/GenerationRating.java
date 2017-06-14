@@ -1,5 +1,6 @@
 package vanham_lifeRating;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -10,12 +11,12 @@ import vanham_life.LifeGrid;
 
 public class GenerationRating implements ActionListener {
 
-    private LifeGrid grid;
+    private LifeGrid grid = new LifeGrid();
     private JFileChooser fileChooser;
     private FileFilter filter = new FileNameExtensionFilter("Life file", new String[]{"life"});
     private static JFrame frame;
     private static JPanel contentPane;
-    private static JLabel list;
+    private static JTextField list;
     private static JButton load, rate;
     private int generationNum = 0;
     private ArrayList gens = new <Generation>ArrayList();
@@ -26,6 +27,7 @@ public class GenerationRating implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         contentPane = new JPanel();
+        contentPane.setLayout(new GridLayout(0, 1, 10, 10));
 
         load = new JButton("Load a file");
         load.addActionListener(this);
@@ -35,11 +37,11 @@ public class GenerationRating implements ActionListener {
         rate = new JButton("Rate Generations");
         rate.addActionListener(this);
         rate.setActionCommand("rate");
+        rate.setVisible(false);
         contentPane.add(rate);
 
-        list = new JLabel("Click the button plz");
+        list = new JTextField("Click the button plz");
         contentPane.add(list);
-
 
         frame.setResizable(false);
         frame.setContentPane(contentPane);
@@ -68,26 +70,26 @@ public class GenerationRating implements ActionListener {
                     grid.load(selectedFile);
                 }
                 generationNum = 0;
+                rate.setVisible(true);
                 break;
             case "rate":
                 //run the file and store each generation in an arraylist
                 //until all cells are dead or 999+ is reached
 
                 //STILL NEED TO DETERMINE WHETER A SOLID STATE WILL EXIST IN BOTH APPLICAIONS
-                
                 String listText = "";
-                while (generationNum > 1000) {
-                    if (!grid.isEmpty()) {
-                        int population = grid.countPopulation();
-                        gens.add(new Generation(generationNum, population));
-                        generationNum++;
-                    }
+                while (generationNum <= 999 && !grid.isEmpty()) {
+                    int population = grid.countPopulation();
+                    gens.add(new Generation(generationNum, population));
+                    grid.step();
+                    generationNum++;
                 }
-                Sorts.mergesort(gens, 0, gens.size()-1);
-                for (int i = 0; i < gens.size(); i++) {
-                    listText += gens.get(i);
+                Sorts.mergesort(gens, 0, gens.size() - 1);
+                for (int i = gens.size()-1; i >= 0; i++) { //Read list backwards(High to low) //BROKENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+                    listText += gens.get(i).toString();
                     listText += "\n";
                 }
+                list.setText(listText);
                 frame.pack();
                 break;
         }
@@ -99,7 +101,7 @@ public class GenerationRating implements ActionListener {
      */
     private static void runGUI() {
         JFrame.setDefaultLookAndFeelDecorated(false);
-        GenerationRating greeting = new GenerationRating();
+        GenerationRating ranking = new GenerationRating();
     }
 
     public static void main(String[] args) {
