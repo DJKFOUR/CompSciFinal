@@ -71,6 +71,7 @@ public class GenerationRating implements ActionListener {
                 }
                 generationNum = 0;
                 rate.setVisible(true);
+                frame.pack();
                 break;
             case "rate":
                 //run the file and store each generation in an arraylist
@@ -85,7 +86,7 @@ public class GenerationRating implements ActionListener {
                     generationNum++;
                 }
                 Sorts.mergesort(gens, 0, gens.size() - 1);
-                for (int i = gens.size()-1; i >= 0; i++) { //Read list backwards(High to low) //BROKENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+                for (int i = gens.size()-1; i >= 0; i--) { //Read list backwards(High to low) //BROKENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
                     listText += gens.get(i).toString();
                     listText += "\n";
                 }
