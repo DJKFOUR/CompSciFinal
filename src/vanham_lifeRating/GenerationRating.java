@@ -55,7 +55,7 @@ public class GenerationRating implements ActionListener {
         rate.setVisible(false);
         contentPane.add(rate);
 
-        list = new JTextField("Click the button plz");
+        list = new JTextField("Load a file and then select \"Rate Generations\" ");
         contentPane.add(list);
 
         frame.setResizable(false);
@@ -66,10 +66,6 @@ public class GenerationRating implements ActionListener {
         frame.setVisible(true);
     }
 
-    /**
-     * Handle button click action event pre: Action event is Clicked post: Label
-     * displays different message depending on if the button was clicked.
-     */
     @Override
     public void actionPerformed(ActionEvent event) {
         String whichBtn = event.getActionCommand();
@@ -90,9 +86,6 @@ public class GenerationRating implements ActionListener {
                 frame.pack();
                 break;
             case "rate":
-                //run the file and store each generation in an arraylist
-                //until all cells are dead or 999+ is reached
-
                 //STILL NEED TO DETERMINE WHETER A SOLID STATE WILL EXIST IN BOTH APPLICAIONS
                 String listText = "";
                 while (generationNum <= 999 && !grid.isEmpty()) {
