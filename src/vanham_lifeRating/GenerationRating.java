@@ -1,5 +1,8 @@
 package vanham_lifeRating;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -15,8 +18,10 @@ public class GenerationRating implements ActionListener {
     private FileFilter filter = new FileNameExtensionFilter("Life file", new String[]{"life"});
     private static JFrame frame;
     private static JPanel contentPane;
-    private static JTextField list;
     private static JButton load, rate;
+    private static JTextField list;
+    private static final Color GRAY = new Color(100, 100, 100);
+    private static final Color TEAL = new Color(0, 250, 200);
     private int generationNum = 0;
     private ArrayList gens = new <Generation>ArrayList();
 
@@ -26,14 +31,25 @@ public class GenerationRating implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         contentPane = new JPanel();
-        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+        contentPane.setBackground(new Color(50, 50, 50));
+        contentPane.setLayout(new GridLayout(0,1,10,10));
         
         load = new JButton("Load a file");
+        load.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        load.setBackground(GRAY);
+        load.setForeground(TEAL);
+        load.setBorderPainted(false);
+        load.setFocusPainted(false);
         load.addActionListener(this);
         load.setActionCommand("load");
         contentPane.add(load);
 
         rate = new JButton("Rate Generations");
+        rate.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        rate.setBackground(GRAY);
+        rate.setForeground(TEAL);
+        rate.setBorderPainted(false);
+        rate.setFocusPainted(false);
         rate.addActionListener(this);
         rate.setActionCommand("rate");
         rate.setVisible(false);
@@ -43,6 +59,7 @@ public class GenerationRating implements ActionListener {
         contentPane.add(list);
 
         frame.setResizable(false);
+        frame.getSize(null);
         frame.setContentPane(contentPane);
         frame.pack();
         frame.setLocationRelativeTo(null);

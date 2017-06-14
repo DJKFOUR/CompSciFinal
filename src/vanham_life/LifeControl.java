@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import javax.swing.*;
 import javax.swing.filechooser.*;
 
@@ -35,7 +34,7 @@ public class LifeControl extends JPanel {
         save.setFont(new Font("Century Gothic", Font.PLAIN, 12));
         save.setBackground(GRAY);
         save.setForeground(TEAL);
-        save.setBorder(null);
+        run.setBorderPainted(false);
         save.setFocusPainted(false);
         save.addActionListener(new BtnListener());
         save.setActionCommand("save");
@@ -45,7 +44,7 @@ public class LifeControl extends JPanel {
         load.setFont(new Font("Century Gothic", Font.PLAIN, 12));
         load.setBackground(GRAY);
         load.setForeground(TEAL);
-        load.setBorder(null);
+        load.setBorderPainted(false);
         load.setFocusPainted(false);
         load.addActionListener(new BtnListener());
         load.setActionCommand("load");
@@ -55,7 +54,7 @@ public class LifeControl extends JPanel {
         step.setFont(new Font("Century Gothic", Font.PLAIN, 12));
         step.setBackground(GRAY);
         step.setForeground(TEAL);
-        step.setBorder(null);
+        step.setBorderPainted(false);
         step.setFocusPainted(false);
         step.addActionListener(new BtnListener());
         step.setActionCommand("step");
