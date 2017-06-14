@@ -12,6 +12,7 @@ import javax.swing.*;
  */
 public class LifeGrid extends JPanel {
     
+    private static final File TEMP = new File("temp.LifeTemp");
     private static int gameSize = 20;
     private static final int RECT_WIDTH = 20;
     private static final int RECT_HEIGHT = RECT_WIDTH;
@@ -37,6 +38,7 @@ public class LifeGrid extends JPanel {
                     System.out.println(x + "," + y + ": Alive");
                 }
                 repaint();
+                saveTemp();
             }
         });
     }
@@ -144,11 +146,46 @@ public class LifeGrid extends JPanel {
         repaint();
     }
     
-    public static void deleteTemp() {
-        File temp = new File("temp.LifeTemp");
-        
-        if(temp.exists()) {
-            temp.delete(); //USE DELETE ON EXIT????????????????????????????????????????????????????????
+    public void saveTemp() {
+        try {
+            
+            /* write objects */
+            FileOutputStream out = new FileOutputStream(TEMP);
+            ObjectOutputStream writeLife = new ObjectOutputStream(out);
+
+            writeLife.writeObject(game);
+
+            writeLife.close();
+            out.close();
+
+            System.out.println("Data written to file.");
+
+        } catch (FileNotFoundException exception) {
+            System.out.println("File could not be found.");
+            System.err.println("FileNotFoundException: "
+                    + exception.getMessage());
+        } catch (IOException exception) {
+            System.out.println("Problem with input/output.");
+            System.err.println("IOException: " + exception.getMessage());
         }
+    }
+    
+    public static void deleteTemp() {
+        
+        if(TEMP.exists()) {
+            TEMP.delete();
+        }
+    }
+    
+    public int countPopulation() {
+        int population = 0;
+        for (int row = 0; row < gameSize; row++) {
+            for (int col = 0; col < gameSize; col++) {
+                if (game.getCell(row, col) == 1) {
+                    population++;
+                }
+            }
+        }
+        return population;
     }
 }
