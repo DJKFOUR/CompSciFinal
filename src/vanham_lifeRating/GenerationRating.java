@@ -86,7 +86,7 @@ public class GenerationRating implements ActionListener {
                     generationNum++;
                 }
                 Sorts.mergesort(gens, 0, gens.size() - 1);
-                for (int i = gens.size()-1; i >= 0; i--) { //Read list backwards(High to low) //BROKENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+                for (int i = gens.size()-1; i >= 0; i--) { //Read list backwards(High to low)
                     listText += gens.get(i).toString();
                     listText += "\n";
                 }
