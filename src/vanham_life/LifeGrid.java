@@ -146,7 +146,7 @@ public class LifeGrid extends JPanel {
         repaint();
     }
     
-    public void saveTemp() {
+    public void saveTemp() { //BETTER TO USE MEMORY?
         try {
             
             /* write objects */

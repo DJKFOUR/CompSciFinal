@@ -34,7 +34,7 @@ public class LifeControl extends JPanel {
         save.setFont(new Font("Century Gothic", Font.PLAIN, 12));
         save.setBackground(GRAY);
         save.setForeground(TEAL);
-        run.setBorderPainted(false);
+        save.setBorderPainted(false);
         save.setFocusPainted(false);
         save.addActionListener(new BtnListener());
         save.setActionCommand("save");

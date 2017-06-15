@@ -13,27 +13,29 @@ import vanham_life.LifeGrid;
 
 public class GenerationRating implements ActionListener {
 
-    private LifeGrid grid = new LifeGrid();
-    private JFileChooser fileChooser;
-    private FileFilter filter = new FileNameExtensionFilter("Life file", new String[]{"life"});
+    private static ImageIcon imageIcon = new ImageIcon("logo.png");
+    private static LifeGrid grid = new LifeGrid();
+    private static JFileChooser fileChooser;
+    private static FileFilter filter = new FileNameExtensionFilter("Life file", new String[]{"life"});
     private static JFrame frame;
     private static JPanel contentPane;
     private static JButton load, rate;
-    private static JTextField list;
+    private static JTextArea list;
     private static final Color GRAY = new Color(100, 100, 100);
     private static final Color TEAL = new Color(0, 250, 200);
-    private int generationNum = 0;
-    private ArrayList gens = new <Generation>ArrayList();
+    private static int generationNum = 0;
+    private static ArrayList gens = new <Generation>ArrayList();
 
     public GenerationRating() {
         
         frame = new JFrame("Life File Generation Rating");
+        frame.setIconImage(imageIcon.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         contentPane = new JPanel();
         contentPane.setBackground(new Color(50, 50, 50));
-        contentPane.setLayout(new GridLayout(0,1,10,10));
-        
+        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+
         load = new JButton("Load a file");
         load.setFont(new Font("Century Gothic", Font.PLAIN, 12));
         load.setBackground(GRAY);
@@ -55,8 +57,13 @@ public class GenerationRating implements ActionListener {
         rate.setVisible(false);
         contentPane.add(rate);
 
-        list = new JTextField("Load a file and then select \"Rate Generations\" ");
-        contentPane.add(list);
+        list = new JTextArea(10,30);
+        list.setText("Load a file and then select \"Rate Generations\" ");
+        list.setLineWrap(true);
+        list.setEditable(false);
+        list.setVisible(true);
+        JScrollPane scroll = new JScrollPane(list);
+        contentPane.add(scroll);
 
         frame.setResizable(false);
         frame.getSize(null);
@@ -81,23 +88,25 @@ public class GenerationRating implements ActionListener {
                     File selectedFile = fileChooser.getSelectedFile();
                     grid.load(selectedFile);
                 }
-                generationNum = 0;
+                generationNum = 1;
                 rate.setVisible(true);
                 frame.pack();
                 break;
             case "rate":
                 //STILL NEED TO DETERMINE WHETER A SOLID STATE WILL EXIST IN BOTH APPLICAIONS
                 String listText = "";
-                while (generationNum <= 999 && !grid.isEmpty()) {
+                while (generationNum < 1000 && !grid.isEmpty()) {
                     int population = grid.countPopulation();
                     gens.add(new Generation(generationNum, population));
                     grid.step();
                     generationNum++;
                 }
                 Sorts.mergesort(gens, 0, gens.size() - 1);
-                for (int i = gens.size()-1; i >= 0; i--) { //Read list backwards(High to low)
+                for (int i = gens.size() - 1; i >= 0; i--) { //Read list backwards(High to low)
                     listText += gens.get(i).toString();
-                    listText += "\n";
+                    if(i>0) {
+                      listText += "\n";  
+                    }
                 }
                 list.setText(listText);
                 frame.pack();
