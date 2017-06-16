@@ -126,7 +126,7 @@ public class GenerationRating implements ActionListener {
                 list.setFont(new Font("Century Gothic", Font.PLAIN, 12));
                 list.setText(listText);
                 list.grabFocus();
-                list.setCaretPosition(20);
+                list.setCaretPosition(0);
                 frame.pack();
                 break;
         }
