@@ -3,6 +3,7 @@ package vanham_life;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
@@ -26,20 +27,14 @@ public class LifeGUI {
     private static void createAndShowGui() {
 
         frame.setIconImage(imageIcon.getImage());
-        frame.addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent winEvt) {
-                LifeGrid.deleteTemp();
-                System.exit(0);
-            }
-        });
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         contentPane.setBackground(new Color(50, 50, 50));
         contentPane.add(gameGrid);
         right.setLayout(new BoxLayout(right, BoxLayout.Y_AXIS));
         buttonsAndStats.setOpaque(false);
         buttonsAndStats.setLayout(new BoxLayout(buttonsAndStats, BoxLayout.Y_AXIS));
-        buttonsAndStats.setBorder(new TitledBorder(new LineBorder(TEAL, 3, true), "MENU", TitledBorder.CENTER,TitledBorder.DEFAULT_POSITION, new Font("Century Gothic", Font.PLAIN, 12), TEAL));
+        buttonsAndStats.setBorder(new CompoundBorder(new TitledBorder(new LineBorder(TEAL, 3, true), "MENU", TitledBorder.CENTER,TitledBorder.DEFAULT_POSITION, new Font("Century Gothic", Font.PLAIN, 12), TEAL), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
         right.setOpaque(false);
         buttonsAndStats.add(gameControl);
         genCount.setFont(new Font("Century Gothic", Font.PLAIN, 12));

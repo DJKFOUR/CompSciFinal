@@ -180,6 +180,7 @@ public class LifeControl extends JPanel {
                     if (returnValue == JFileChooser.APPROVE_OPTION) {
                         File selectedFile = fileChooser.getSelectedFile();
                         grid.load(selectedFile);
+                        grid.saveTemp();
                     }
                     generationNum = 0;
                     LifeGUI.changeGenCounter(" ");

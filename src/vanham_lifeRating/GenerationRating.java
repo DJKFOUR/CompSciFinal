@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.filechooser.*;
 import vanham_life.LifeGrid;
 
@@ -19,15 +21,17 @@ public class GenerationRating implements ActionListener {
     private static FileFilter filter = new FileNameExtensionFilter("Life file", new String[]{"life"});
     private static JFrame frame;
     private static JPanel contentPane;
+    private static JPanel controls;
     private static JButton load, rate;
     private static JTextArea list;
+    private static JScrollPane scroll;
     private static final Color GRAY = new Color(100, 100, 100);
     private static final Color TEAL = new Color(0, 250, 200);
     private static int generationNum = 0;
     private static ArrayList gens = new <Generation>ArrayList();
 
     public GenerationRating() {
-        
+
         frame = new JFrame("Life File Generation Rating");
         frame.setIconImage(imageIcon.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,6 +39,23 @@ public class GenerationRating implements ActionListener {
         contentPane = new JPanel();
         contentPane.setBackground(new Color(50, 50, 50));
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+
+        controls = new JPanel();
+        controls.setOpaque(false);
+        controls.setLayout(new GridLayout(1, 2, 10, 10));
+        controls.setBorder(new CompoundBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10), new CompoundBorder(new LineBorder(TEAL, 3, true), BorderFactory.createEmptyBorder(5, 5, 5, 5))));
+
+        list = new JTextArea(10, 30);
+        list.setText("To begin, please load a file.");
+        list.setFont(new Font("Century Gothic", Font.ITALIC, 12));
+        list.setBackground(Color.BLACK);
+        list.setForeground(TEAL);
+        list.setLineWrap(true);
+        list.setEditable(false);
+        list.setVisible(true);
+        scroll = new JScrollPane(list);
+        scroll.setBorder(BorderFactory.createEmptyBorder());
+        contentPane.add(scroll);
 
         load = new JButton("Load a file");
         load.setFont(new Font("Century Gothic", Font.PLAIN, 12));
@@ -44,7 +65,7 @@ public class GenerationRating implements ActionListener {
         load.setFocusPainted(false);
         load.addActionListener(this);
         load.setActionCommand("load");
-        contentPane.add(load);
+        controls.add(load);
 
         rate = new JButton("Rate Generations");
         rate.setFont(new Font("Century Gothic", Font.PLAIN, 12));
@@ -55,18 +76,11 @@ public class GenerationRating implements ActionListener {
         rate.addActionListener(this);
         rate.setActionCommand("rate");
         rate.setVisible(false);
-        contentPane.add(rate);
+        controls.add(rate);
 
-        list = new JTextArea(10,30);
-        list.setText("Load a file and then select \"Rate Generations\" ");
-        list.setLineWrap(true);
-        list.setEditable(false);
-        list.setVisible(true);
-        JScrollPane scroll = new JScrollPane(list);
-        contentPane.add(scroll);
+        contentPane.add(controls);
 
         frame.setResizable(false);
-        frame.getSize(null);
         frame.setContentPane(contentPane);
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -86,11 +100,12 @@ public class GenerationRating implements ActionListener {
                 returnValue = fileChooser.showOpenDialog(null);
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
+                    list.setText("Please click \"Rate Generations\"");
                     grid.load(selectedFile);
+                    generationNum = 1;
+                    rate.setVisible(true);
+                    frame.pack();
                 }
-                generationNum = 1;
-                rate.setVisible(true);
-                frame.pack();
                 break;
             case "rate":
                 //STILL NEED TO DETERMINE WHETER A SOLID STATE WILL EXIST IN BOTH APPLICAIONS
@@ -104,11 +119,14 @@ public class GenerationRating implements ActionListener {
                 Sorts.mergesort(gens, 0, gens.size() - 1);
                 for (int i = gens.size() - 1; i >= 0; i--) { //Read list backwards(High to low)
                     listText += gens.get(i).toString();
-                    if(i>0) {
-                      listText += "\n";  
+                    if (i > 0) {
+                        listText += "\n";
                     }
                 }
+                list.setFont(new Font("Century Gothic", Font.PLAIN, 12));
                 list.setText(listText);
+                list.grabFocus();
+                list.setCaretPosition(20);
                 frame.pack();
                 break;
         }

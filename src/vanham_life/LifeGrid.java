@@ -12,7 +12,7 @@ import javax.swing.*;
  */
 public class LifeGrid extends JPanel {
     
-    private static final File TEMP = new File("temp.LifeTemp");
+    private static File temp;
     private static int gameSize = 20;
     private static final int RECT_WIDTH = 20;
     private static final int RECT_HEIGHT = RECT_WIDTH;
@@ -22,6 +22,14 @@ public class LifeGrid extends JPanel {
     private Life game;
 
     public LifeGrid() {
+        try {
+            temp = File.createTempFile("life", ".tmp");
+            System.out.println("Temp file : " + temp.getAbsolutePath());
+        } catch (IOException exception) {
+            System.out.println("Problem with input/output.");
+            System.err.println("IOException: " + exception.getMessage());
+        }
+        temp.deleteOnExit();
         game = new Life(gameSize);
         gridSize = game.getSize();
         setBackground(Color.BLACK);
@@ -146,11 +154,11 @@ public class LifeGrid extends JPanel {
         repaint();
     }
     
-    public void saveTemp() { //BETTER TO USE MEMORY?
+    public void saveTemp() {
         try {
             
             /* write objects */
-            FileOutputStream out = new FileOutputStream(TEMP);
+            FileOutputStream out = new FileOutputStream(temp);
             ObjectOutputStream writeLife = new ObjectOutputStream(out);
 
             writeLife.writeObject(game);
@@ -158,7 +166,7 @@ public class LifeGrid extends JPanel {
             writeLife.close();
             out.close();
 
-            System.out.println("Data written to file.");
+            System.out.println("Temp file updated.");
 
         } catch (FileNotFoundException exception) {
             System.out.println("File could not be found.");
@@ -167,13 +175,6 @@ public class LifeGrid extends JPanel {
         } catch (IOException exception) {
             System.out.println("Problem with input/output.");
             System.err.println("IOException: " + exception.getMessage());
-        }
-    }
-    
-    public static void deleteTemp() {
-        
-        if(TEMP.exists()) {
-            TEMP.delete();
         }
     }
     

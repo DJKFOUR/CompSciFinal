@@ -35,6 +35,6 @@ public class Generation implements Comparable{
     
     @Override
     public String toString() {
-        return "G=" + generationNum + "P=" + population;
+        return "Generation: " + generationNum + "   Population: " + population;
     }
 }
