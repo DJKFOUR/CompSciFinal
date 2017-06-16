@@ -128,6 +128,7 @@ public class GenerationRating implements ActionListener {
                 list.grabFocus();
                 list.setCaretPosition(0);
                 frame.pack();
+                System.out.println("Data sorted");
                 break;
         }
 
