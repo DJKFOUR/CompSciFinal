@@ -86,39 +86,39 @@ public class Life implements LifeInterface, Serializable{
     
     /**
      * Counts how many adjacent cells are alive
-     * @param cellRow = row address of test cell
+     * @param row = row address of test cell
      *  0 < cellRow < gridSize - 1
-     * @param cellCol = column address of test cell
+     * @param col = column address of test cell
      * 0 < cellCol < gridSize - 1
      * @return int count of adjacent live cells
      */
     @Override
-    public int countNeighbours(int cellRow, int cellCol) {
+    public int countNeighbours(int row, int col) {
         int numNeighbours = 0;
-        if (0 < cellRow && cellRow < grid.length - 1 && //DON'T COUNT FOR BORDER NEIGHBOURS
-                0 < cellCol && cellCol < grid[0].length -1) {
-            if (grid[cellRow - 1][cellCol] == 1) { //Above
+        if (0 < row && row < grid.length - 1 && //DON'T COUNT FOR BORDER NEIGHBOURS
+                0 < col && col < grid[0].length -1) {
+            if (getCell(row-1,col) == 1) { //Above
                 numNeighbours++;
             }
-            if (grid[cellRow + 1][cellCol] == 1) { //Below
+            if (getCell(row+1,col) == 1) { //Below
                 numNeighbours++;
             }
-            if (grid[cellRow][cellCol + 1] == 1) { //Right
+            if (getCell(row,col+1) == 1) { //Right
                 numNeighbours++;
             }
-            if (grid[cellRow][cellCol - 1] == 1) { //Left
+            if (getCell(row,col-1) == 1) { //Left
                 numNeighbours++;
             }
-            if (grid[cellRow - 1][cellCol + 1] == 1) { //Diag up and right
+            if (getCell(row-1,col+1) == 1) { //Diag up and right
                 numNeighbours++;
             }
-            if (grid[cellRow + 1][cellCol + 1] == 1) { //Diag down and right
+            if (getCell(row+1,col+1) == 1) { //Diag down and right
                 numNeighbours++;
             }
-            if (grid[cellRow - 1][cellCol - 1] == 1) { //Diag up and left
+            if (getCell(row-1,col-1) == 1) { //Diag up and left
                 numNeighbours++;
             }
-            if (grid[cellRow + 1][cellCol - 1] == 1) { //Diag down and left
+            if (getCell(row+1,col-1) == 1) { //Diag down and left
                 numNeighbours++;
             }
         }
@@ -126,23 +126,23 @@ public class Life implements LifeInterface, Serializable{
     }
     
     /**
-     * @param cellRow = row address of test cell     * 
+     * @param row = row address of test cell     * 
      *  0 < cellRow < gridSize - 1
-     * @param cellCol = column address of test cell
+     * @param col = column address of test cell
      * 0 < cellCol < gridSize - 1
      * @return int = state of cell,  1 for live, 0 for dead
      */
     @Override
-    public int applyRules(int cellRow, int cellCol) {
-        if (countNeighbours(cellRow, cellCol) < 2) { //Underpopulation, alive cells die, dead cells stay dead
+    public int applyRules(int row, int col) {
+        if (countNeighbours(row, col) < 2) { //Underpopulation, alive cells die, dead cells stay dead
             return 0;
-        } else if (countNeighbours(cellRow, cellCol) == 2) { //Sustained, alive cells atay alive, dead cells stay dead
-            if (grid[cellRow][cellCol] == 1) { //Alive
+        } else if (countNeighbours(row, col) == 2) { //Sustained, alive cells atay alive, dead cells stay dead
+            if (getCell(row,col) == 1) { //Alive
                 return 1;
             } else { //Dead
                 return 0;
             }
-        } else if (countNeighbours(cellRow, cellCol) > 3) { //Overpopulation, alive cells die, dead cells stay dead
+        } else if (countNeighbours(row, col) > 3) { //Overpopulation, alive cells die, dead cells stay dead
             return 0;
         } else { //Equal to 3. Birth, alive cells stay alive, dead cells become alive
             return 1;
@@ -169,7 +169,7 @@ public class Life implements LifeInterface, Serializable{
         int population = 0;
         for (int row = 0; row < grid.length; row++) {
             for (int col = 0; col < grid[0].length; col++) {
-                if (grid[row][col] == 1) {
+                if (getCell(row,col) == 1) {
                     population++;
                 }
             }
