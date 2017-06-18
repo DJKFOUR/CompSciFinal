@@ -104,13 +104,13 @@ public class LifeGrid extends JPanel {
 
             System.out.println("Data written to file.");
 
-        } catch (FileNotFoundException exception) {
+        } catch (FileNotFoundException e) {
             System.out.println("File could not be found.");
             System.err.println("FileNotFoundException: "
-                    + exception.getMessage());
-        } catch (IOException exception) {
+                    + e.getMessage());
+        } catch (IOException e) {
             System.out.println("Problem with input/output.");
-            System.err.println("IOException: " + exception.getMessage());
+            System.err.println("IOException: " + e.getMessage());
         }
     }
 
@@ -129,17 +129,17 @@ public class LifeGrid extends JPanel {
 
             System.out.println("Data read from file.");
 
-        } catch (FileNotFoundException exception) {
+        } catch (FileNotFoundException e) {
             System.out.println("File could not be found.");
             System.err.println("FileNotFoundException: "
-                    + exception.getMessage());
-        } catch (IOException exception) {
+                    + e.getMessage());
+        } catch (IOException e) {
             System.out.println("Problem with input/output.");
-            System.err.println("IOException: " + exception.getMessage());
-        } catch (ClassNotFoundException exception) {
+            System.err.println("IOException: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
             System.out.println("Class could not be used to cast object.");
             System.err.println("ClassNotFoundException: "
-                    + exception.getMessage());
+                    + e.getMessage());
         }
         repaint();
     }
@@ -158,13 +158,13 @@ public class LifeGrid extends JPanel {
 
             System.out.println("Temp file updated.");
 
-        } catch (FileNotFoundException exception) {
+        } catch (FileNotFoundException e) {
             System.out.println("File could not be found.");
             System.err.println("FileNotFoundException: "
-                    + exception.getMessage());
-        } catch (IOException exception) {
+                    + e.getMessage());
+        } catch (IOException e) {
             System.out.println("Problem with input/output.");
-            System.err.println("IOException: " + exception.getMessage());
+            System.err.println("IOException: " + e.getMessage());
         }
     }
     
@@ -182,17 +182,17 @@ public class LifeGrid extends JPanel {
 
             System.out.println("Data read from file.");
 
-        } catch (FileNotFoundException exception) {
+        } catch (FileNotFoundException e) {
             System.out.println("File could not be found.");
             System.err.println("FileNotFoundException: "
-                    + exception.getMessage());
-        } catch (IOException exception) {
+                    + e.getMessage());
+        } catch (IOException e) {
             System.out.println("Problem with input/output.");
-            System.err.println("IOException: " + exception.getMessage());
-        } catch (ClassNotFoundException exception) {
+            System.err.println("IOException: " + e.getMessage());
+        } catch (ClassNotFoundException e) {
             System.out.println("Class could not be used to cast object.");
             System.err.println("ClassNotFoundException: "
-                    + exception.getMessage());
+                    + e.getMessage());
         }
         repaint();
     }

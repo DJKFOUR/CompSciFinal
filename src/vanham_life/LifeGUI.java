@@ -1,11 +1,7 @@
 package vanham_life;
 
 import java.awt.*;
-import java.awt.event.WindowEvent;
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
 
 /**
  *
