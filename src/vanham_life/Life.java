@@ -165,6 +165,18 @@ public class Life implements LifeInterface, Serializable{
         setPattern(nextGen);
     }
     
+    public int countPopulation() {
+        int population = 0;
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[0].length; col++) {
+                if (grid[row][col] == 1) {
+                    population++;
+                }
+            }
+        }
+        return population;
+    }
+    
     /**
      * Creates a string representation of the grid
      * @return String

@@ -13,10 +13,9 @@ import javax.swing.*;
 public class LifeGrid extends JPanel {
     
     private static File temp;
-    private static int gameSize = 20;
+    private static final int GAME_SIZE = 20;
     private static final int RECT_WIDTH = 20;
     private static final int RECT_HEIGHT = RECT_WIDTH;
-    private int gridSize;
     static final Color TEAL = new Color(0, 250, 200);
     private static Color colour = TEAL;
     private Life game;
@@ -30,8 +29,7 @@ public class LifeGrid extends JPanel {
             System.err.println("IOException: " + exception.getMessage());
         }
         temp.deleteOnExit();
-        game = new Life(gameSize);
-        gridSize = game.getSize();
+        game = new Life(GAME_SIZE);
         setBackground(Color.BLACK);
         addMouseListener(new MouseAdapter() {
             @Override
@@ -55,22 +53,21 @@ public class LifeGrid extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        for (int row = 0; row < gridSize; row++) {
-            for (int col = 0; col < gridSize; col++) {
+        for (int row = 0; row < GAME_SIZE; row++) {
+            for (int col = 0; col < GAME_SIZE; col++) {
                 if (game.getCell(row, col) == 1) {
                     g.setColor(colour);
                     g.fillRect(col * RECT_HEIGHT, row * RECT_WIDTH, RECT_WIDTH, RECT_HEIGHT);
                 }
                 g.setColor(Color.GRAY);
-                g.drawRect(col * RECT_HEIGHT, row * RECT_WIDTH, RECT_WIDTH, RECT_HEIGHT);
+                g.drawRect(col * RECT_HEIGHT, row * RECT_WIDTH, RECT_WIDTH-1, RECT_HEIGHT-1);
             }
         }
     }
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(gridSize * RECT_WIDTH + 1, gridSize * RECT_HEIGHT + 1);
-        //added ones increase grid size so you can see the cell outlines
+        return new Dimension(GAME_SIZE * RECT_WIDTH, GAME_SIZE * RECT_HEIGHT);
     }
 
     public void step() {
@@ -84,14 +81,7 @@ public class LifeGrid extends JPanel {
     }
 
     public boolean isEmpty() {
-        for (int row = 0; row < game.getSize(); row++) {
-            for (int col = 0; col < game.getSize(); col++) {
-                if (game.getCell(row, col) == 1) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return game.countPopulation() == 0;
     }
     
     public void setColour(Color c) {
@@ -178,15 +168,36 @@ public class LifeGrid extends JPanel {
         }
     }
     
-    public int countPopulation() {
-        int population = 0;
-        for (int row = 0; row < gameSize; row++) {
-            for (int col = 0; col < gameSize; col++) {
-                if (game.getCell(row, col) == 1) {
-                    population++;
-                }
-            }
+    public void loadTemp() {
+        try {
+            
+            /* read objects */
+            FileInputStream in = new FileInputStream(temp);
+            ObjectInputStream readLife = new ObjectInputStream(in);
+
+            game = (Life)readLife.readObject();
+
+            readLife.close();
+            in.close();
+
+            System.out.println("Data read from file.");
+
+        } catch (FileNotFoundException exception) {
+            System.out.println("File could not be found.");
+            System.err.println("FileNotFoundException: "
+                    + exception.getMessage());
+        } catch (IOException exception) {
+            System.out.println("Problem with input/output.");
+            System.err.println("IOException: " + exception.getMessage());
+        } catch (ClassNotFoundException exception) {
+            System.out.println("Class could not be used to cast object.");
+            System.err.println("ClassNotFoundException: "
+                    + exception.getMessage());
         }
-        return population;
+        repaint();
+    }
+    
+    public int countPopulation() {
+        return game.countPopulation();
     }
 }

@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.*;
 
 /**
@@ -14,8 +17,11 @@ import javax.swing.filechooser.*;
 public class LifeControl extends JPanel {
 
     private LifeGrid grid;
+    private JPanel buttons;
+    private JPanel counter;
     private JButton save, load, step, clear, run, recall;
     private JButton red, orange, yellow, green, blue, purple, teal;
+    private JLabel generationCounter;
     private JFileChooser fileChooser;
     private FileFilter filter = new FileNameExtensionFilter("Life file", new String[]{"life"});
     private int generationNum = 0;
@@ -26,9 +32,17 @@ public class LifeControl extends JPanel {
 
     public LifeControl(final LifeGrid grid) {
         this.grid = grid;
-
-        setLayout(new GridLayout(0, 2, 10, 10));
+        
         setOpaque(false);
+        setBorder(new CompoundBorder(new TitledBorder(new LineBorder(TEAL, 3, true), "MENU", TitledBorder.CENTER,TitledBorder.DEFAULT_POSITION, new Font("Century Gothic", Font.PLAIN, 12), TEAL), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        
+        buttons = new JPanel();
+        buttons.setLayout(new GridLayout(0, 2, 10, 10));
+        buttons.setOpaque(false);
+        
+        counter = new JPanel();
+        counter.setOpaque(false);
 
         save = new JButton("Save");
         save.setFont(new Font("Century Gothic", Font.PLAIN, 12));
@@ -38,7 +52,7 @@ public class LifeControl extends JPanel {
         save.setFocusPainted(false);
         save.addActionListener(new BtnListener());
         save.setActionCommand("save");
-        add(save);
+        buttons.add(save);
 
         load = new JButton("Load");
         load.setFont(new Font("Century Gothic", Font.PLAIN, 12));
@@ -48,7 +62,7 @@ public class LifeControl extends JPanel {
         load.setFocusPainted(false);
         load.addActionListener(new BtnListener());
         load.setActionCommand("load");
-        add(load);
+        buttons.add(load);
 
         step = new JButton("Take Step");
         step.setFont(new Font("Century Gothic", Font.PLAIN, 12));
@@ -58,7 +72,7 @@ public class LifeControl extends JPanel {
         step.setFocusPainted(false);
         step.addActionListener(new BtnListener());
         step.setActionCommand("step");
-        add(step);
+        buttons.add(step);
 
         clear = new JButton("Clear Grid");
         clear.setFont(new Font("Century Gothic", Font.PLAIN, 12));
@@ -68,7 +82,7 @@ public class LifeControl extends JPanel {
         clear.setFocusPainted(false);
         clear.addActionListener(new BtnListener());
         clear.setActionCommand("clear");
-        add(clear);
+        buttons.add(clear);
 
         run = new JButton("Run");
         run.setFont(new Font("Century Gothic", Font.PLAIN, 12));
@@ -78,8 +92,8 @@ public class LifeControl extends JPanel {
         run.setFocusPainted(false);
         run.addActionListener(new BtnListener());
         run.setActionCommand("run");
-        add(run);
-        
+        buttons.add(run);
+
         recall = new JButton("Recall");
         recall.setFont(new Font("Century Gothic", Font.PLAIN, 12));
         recall.setBackground(GRAY);
@@ -89,7 +103,7 @@ public class LifeControl extends JPanel {
         recall.addActionListener(new BtnListener());
         recall.setActionCommand("recall");
         recall.setVisible(false);
-        add(recall);
+        buttons.add(recall);
 
         red = new JButton("");
         red.setBackground(Color.RED);
@@ -97,7 +111,7 @@ public class LifeControl extends JPanel {
         red.setFocusPainted(false);
         red.addActionListener(new BtnListener());
         red.setActionCommand("red");
-        add(red);
+        buttons.add(red);
 
         orange = new JButton("");
         orange.setBackground(Color.ORANGE);
@@ -105,7 +119,7 @@ public class LifeControl extends JPanel {
         orange.setFocusPainted(false);
         orange.addActionListener(new BtnListener());
         orange.setActionCommand("orange");
-        add(orange);
+        buttons.add(orange);
 
         yellow = new JButton("");
         yellow.setBackground(Color.YELLOW);
@@ -113,7 +127,7 @@ public class LifeControl extends JPanel {
         yellow.setFocusPainted(false);
         yellow.addActionListener(new BtnListener());
         yellow.setActionCommand("yellow");
-        add(yellow);
+        buttons.add(yellow);
 
         green = new JButton("");
         green.setBackground(Color.GREEN);
@@ -121,7 +135,7 @@ public class LifeControl extends JPanel {
         green.setFocusPainted(false);
         green.addActionListener(new BtnListener());
         green.setActionCommand("green");
-        add(green);
+        buttons.add(green);
 
         teal = new JButton("");
         teal.setBackground(TEAL);
@@ -129,7 +143,7 @@ public class LifeControl extends JPanel {
         teal.setFocusPainted(false);
         teal.addActionListener(new BtnListener());
         teal.setActionCommand("teal");
-        add(teal);
+        buttons.add(teal);
 
         blue = new JButton("");
         blue.setBackground(Color.BLUE);
@@ -137,7 +151,7 @@ public class LifeControl extends JPanel {
         blue.setFocusPainted(false);
         blue.addActionListener(new BtnListener());
         blue.setActionCommand("blue");
-        add(blue);
+        buttons.add(blue);
 
         purple = new JButton("");
         purple.setBackground(PURPLE);
@@ -145,7 +159,15 @@ public class LifeControl extends JPanel {
         purple.setFocusPainted(false);
         purple.addActionListener(new BtnListener());
         purple.setActionCommand("purple");
-        add(purple);
+        buttons.add(purple);
+        
+        generationCounter = new JLabel(" ");
+        generationCounter.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        generationCounter.setForeground(TEAL);
+        counter.add(generationCounter);
+        
+        add(buttons);
+        add(generationCounter);
     }
 
     class BtnListener implements ActionListener {
@@ -165,7 +187,7 @@ public class LifeControl extends JPanel {
                         File selectedFile = fileChooser.getSelectedFile();
                         String fileName = selectedFile.getAbsolutePath();
                         if (!fileName.endsWith(".Life")) {
-                           fileName = selectedFile.getAbsolutePath() + ".Life";
+                            fileName = selectedFile.getAbsolutePath() + ".Life";
                         }
                         File saveFile = new File(fileName);
                         grid.save(saveFile);
@@ -183,18 +205,18 @@ public class LifeControl extends JPanel {
                         grid.saveTemp();
                     }
                     generationNum = 0;
-                    LifeGUI.changeGenCounter(" ");
+                    generationCounter.setText(" ");
                     break;
                 case "step":
                     grid.step();
                     generationNum++;
-                    LifeGUI.changeGenCounter("Generation: " + generationNum);
+                    generationCounter.setText("Generation: " + generationNum);
                     System.out.println("Single Step Taken");
                     break;
                 case "clear":
                     grid.clear();
                     generationNum = 0;
-                    LifeGUI.changeGenCounter(" ");
+                    generationCounter.setText(" ");
                     System.out.println("Grid Cleared");
                     break;
                 case "run":
@@ -218,9 +240,9 @@ public class LifeControl extends JPanel {
                     System.out.println("Timer Running: " + timer.isRunning());
                     break;
                 case "recall":
-                    grid.load(new File("temp.LifeTemp"));
+                    grid.loadTemp();
                     generationNum = 0;
-                    LifeGUI.changeGenCounter(" ");
+                    generationCounter.setText(" ");
                     break;
                 case "red":
                     grid.setColour(Color.RED);
@@ -262,11 +284,11 @@ public class LifeControl extends JPanel {
                     run.setActionCommand("run");
                     System.out.println("Timer Running: " + timer.isRunning());
                     generationNum = 999;
-                    LifeGUI.changeGenCounter("Generation: 999+");
+                    generationCounter.setText("Generation: 999+");
                 } else {
                     grid.step();
                     generationNum++;
-                    LifeGUI.changeGenCounter("Generation: " + generationNum);
+                    generationCounter.setText("Generation: " + generationNum);
                 }
                 LifeGUI.pack();
             } else {

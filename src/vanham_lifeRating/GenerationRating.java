@@ -16,7 +16,7 @@ import vanham_life.LifeGrid;
 public class GenerationRating implements ActionListener {
 
     private static ImageIcon imageIcon = new ImageIcon("logo.png");
-    private static LifeGrid grid = new LifeGrid();
+    private static LightLifeGrid grid = new LightLifeGrid();
     private static JFileChooser fileChooser;
     private static FileFilter filter = new FileNameExtensionFilter("Life file", new String[]{"life"});
     private static JFrame frame;
