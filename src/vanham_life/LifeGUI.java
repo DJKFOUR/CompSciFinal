@@ -16,7 +16,6 @@ public class LifeGUI {
     private static LifeControl gameControl = new LifeControl(gameGrid);
     private static JPanel right = new JPanel();
     private static JFrame frame = new JFrame("LIFE");
-    private static final Color TEAL = new Color(0, 250, 200);
 
     private static void createAndShowGui() {
 
@@ -36,11 +35,6 @@ public class LifeGUI {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-
-    public static void pack() {
-        frame.pack();
-    }
-
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

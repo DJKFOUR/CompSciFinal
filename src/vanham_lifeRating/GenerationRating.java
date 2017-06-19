@@ -85,25 +85,15 @@ public class GenerationRating implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         String whichBtn = event.getActionCommand();
-        int returnValue;
         switch (whichBtn) {
             case "load":
-                fileChooser = new JFileChooser();
-                fileChooser.setFileFilter(filter);
-                fileChooser.addChoosableFileFilter(filter);
-                fileChooser.setAcceptAllFileFilterUsed(false);
-                returnValue = fileChooser.showOpenDialog(null);
-                if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    File selectedFile = fileChooser.getSelectedFile();
-                    list.setText("Please click \"Rate Generations\"");
-                    grid.load(selectedFile);
-                    generationNum = 1;
-                    rate.setVisible(true);
-                    frame.pack();
-                }
+                grid.load();
+                list.setText("Please click \"Rate Generations\"");
+                generationNum = 1;
+                rate.setVisible(true);
+                frame.pack();
                 break;
             case "rate":
-                //STILL NEED TO DETERMINE WHETER A SOLID STATE WILL EXIST IN BOTH APPLICAIONS
                 String listText = "";
                 while (generationNum < 1000 && !grid.isEmpty()) {
                     int population = grid.countPopulation();

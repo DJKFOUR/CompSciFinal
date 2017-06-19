@@ -89,59 +89,14 @@ public class LifeGrid extends JPanel {
         repaint();
     }
 
-    public void save(File f) {
-        try {
-            File lifeFile = f;
-            
-            /* write objects */
-            FileOutputStream out = new FileOutputStream(lifeFile);
-            ObjectOutputStream writeLife = new ObjectOutputStream(out);
-
-            writeLife.writeObject(game);
-
-            writeLife.close();
-            out.close();
-
-            System.out.println("Data written to file.");
-
-        } catch (FileNotFoundException e) {
-            System.out.println("File could not be found.");
-            System.err.println("FileNotFoundException: "
-                    + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Problem with input/output.");
-            System.err.println("IOException: " + e.getMessage());
-        }
+    public void save() {
+        SaveLoad.save(game);
     }
-
-    public void load(File f) {
-        try {
-            File lifeFile = f;
-            
-            /* read objects */
-            FileInputStream in = new FileInputStream(lifeFile);
-            ObjectInputStream readLife = new ObjectInputStream(in);
-
-            game = (Life)readLife.readObject();
-
-            readLife.close();
-            in.close();
-
-            System.out.println("Data read from file.");
-
-        } catch (FileNotFoundException e) {
-            System.out.println("File could not be found.");
-            System.err.println("FileNotFoundException: "
-                    + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Problem with input/output.");
-            System.err.println("IOException: " + e.getMessage());
-        } catch (ClassNotFoundException e) {
-            System.out.println("Class could not be used to cast object.");
-            System.err.println("ClassNotFoundException: "
-                    + e.getMessage());
-        }
+    
+    public void load() {
+        game = SaveLoad.load();
         repaint();
+        saveTemp();
     }
     
     public void saveTemp() {

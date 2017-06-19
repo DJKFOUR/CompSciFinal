@@ -2,10 +2,8 @@ package vanham_life;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.filechooser.*;
 
 /**
  *
@@ -19,8 +17,6 @@ public class LifeControl extends JPanel {
     private JButton save, load, step, clear, run, recall;
     private JButton red, orange, yellow, green, blue, purple, teal;
     private JLabel generationCounter;
-    private JFileChooser fileChooser;
-    private FileFilter filter = new FileNameExtensionFilter("Life file", new String[]{"life"});
     private int generationNum = 0;
     private Timer timer = new Timer(250, new TimerListener());
     private static final Color GRAY = new Color(100, 100, 100);
@@ -172,35 +168,12 @@ public class LifeControl extends JPanel {
         @Override
         public void actionPerformed(ActionEvent event) {
             String whichBtn = event.getActionCommand();
-            int returnValue;
             switch (whichBtn) {
                 case "save":
-                    fileChooser = new JFileChooser();
-                    fileChooser.setFileFilter(filter);
-                    fileChooser.addChoosableFileFilter(filter);
-                    fileChooser.setAcceptAllFileFilterUsed(false);
-                    returnValue = fileChooser.showSaveDialog(null);
-                    if (returnValue == JFileChooser.APPROVE_OPTION) {
-                        File selectedFile = fileChooser.getSelectedFile();
-                        String fileName = selectedFile.getAbsolutePath();
-                        if (!fileName.endsWith(".Life")) {
-                            fileName = selectedFile.getAbsolutePath() + ".Life";
-                        }
-                        File saveFile = new File(fileName);
-                        grid.save(saveFile);
-                    }
+                    grid.save();
                     break;
                 case "load":
-                    fileChooser = new JFileChooser();
-                    fileChooser.setFileFilter(filter);
-                    fileChooser.addChoosableFileFilter(filter);
-                    fileChooser.setAcceptAllFileFilterUsed(false);
-                    returnValue = fileChooser.showOpenDialog(null);
-                    if (returnValue == JFileChooser.APPROVE_OPTION) {
-                        File selectedFile = fileChooser.getSelectedFile();
-                        grid.load(selectedFile);
-                        grid.saveTemp();
-                    }
+                    grid.load();
                     generationNum = 0;
                     generationCounter.setText(" ");
                     break;
@@ -287,7 +260,6 @@ public class LifeControl extends JPanel {
                     generationNum++;
                     generationCounter.setText("Generation: " + generationNum);
                 }
-                LifeGUI.pack();
             } else {
                 timer.stop();
                 recall.setVisible(true);
