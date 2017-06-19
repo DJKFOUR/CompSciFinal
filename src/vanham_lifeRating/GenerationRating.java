@@ -2,18 +2,15 @@ package vanham_lifeRating;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.filechooser.*;
+import vanham_life.Life;
 
 public class GenerationRating implements ActionListener {
 
     private static ImageIcon imageIcon = new ImageIcon("logo.png");
-    private static LightLifeGrid grid = new LightLifeGrid();
-    private static JFileChooser fileChooser;
-    private static FileFilter filter = new FileNameExtensionFilter("Life file", new String[]{"life"});
+    private static Life game = new Life(20);
     private static JFrame frame;
     private static JPanel contentPane;
     private static JPanel controls;
@@ -87,7 +84,7 @@ public class GenerationRating implements ActionListener {
         String whichBtn = event.getActionCommand();
         switch (whichBtn) {
             case "load":
-                grid.load();
+                game.load();
                 list.setText("Please click \"Rate Generations\"");
                 generationNum = 1;
                 rate.setVisible(true);
@@ -95,10 +92,10 @@ public class GenerationRating implements ActionListener {
                 break;
             case "rate":
                 String listText = "";
-                while (generationNum < 1000 && !grid.isEmpty()) {
-                    int population = grid.countPopulation();
+                while (generationNum < 1000 && game.countPopulation()!=0) {
+                    int population = game.countPopulation();
                     gens.add(new Generation(generationNum, population));
-                    grid.step();
+                    game.takeStep();
                     generationNum++;
                 }
                 Sorts.mergesort(gens, 0, gens.size() - 1);

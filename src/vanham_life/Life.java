@@ -174,6 +174,14 @@ public class Life implements LifeInterface, Serializable{
         return population;
     }
     
+    public void save() {
+        SaveLoad.save(grid);
+    }
+    
+    public void load() {
+        setPattern(SaveLoad.load());
+    }
+    
     /**
      * Creates a string representation of the grid
      * @return String

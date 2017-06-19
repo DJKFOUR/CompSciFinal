@@ -16,17 +16,17 @@ public class SaveLoad {
 
     private static JFileChooser fileChooser;
     private static final FileNameExtensionFilter filter = new FileNameExtensionFilter("Life file", new String[]{"life"});
-    private static Life loadedGame;
+    private static int[][] loadedGrid;
 
-    public static void save(Life game) {
-        saveFile(getSaveFile(), game);
+    public static void save(int[][] grid) {
+        saveFile(getSaveFile(), grid);
     }
 
-    public static Life load() {
+    public static int[][] load() {
         return loadFile(getLoadFile());
     }
 
-    private static void saveFile(File f, Life game) {
+    private static void saveFile(File f, int[][] grid) {
         try {
             File lifeFile = f;
 
@@ -34,7 +34,7 @@ public class SaveLoad {
             FileOutputStream out = new FileOutputStream(lifeFile);
             ObjectOutputStream writeLife = new ObjectOutputStream(out);
 
-            writeLife.writeObject(game);
+            writeLife.writeObject(grid);
 
             writeLife.close();
             out.close();
@@ -51,7 +51,7 @@ public class SaveLoad {
         }
     }
 
-    private static Life loadFile(File f) {
+    private static int[][] loadFile(File f) {
         try {
             File lifeFile = f;
 
@@ -59,7 +59,7 @@ public class SaveLoad {
             FileInputStream in = new FileInputStream(lifeFile);
             ObjectInputStream readLife = new ObjectInputStream(in);
 
-            loadedGame = (Life) readLife.readObject();
+            loadedGrid = (int[][])readLife.readObject();
 
             readLife.close();
             in.close();
@@ -79,7 +79,7 @@ public class SaveLoad {
                     + e.getMessage());
         }
 
-        return loadedGame;
+        return loadedGrid;
     }
 
     private static File getSaveFile() {

@@ -90,11 +90,11 @@ public class LifeGrid extends JPanel {
     }
 
     public void save() {
-        SaveLoad.save(game);
+        game.save();
     }
     
     public void load() {
-        game = SaveLoad.load();
+        game.load();
         repaint();
         saveTemp();
     }
