@@ -9,7 +9,9 @@ import java.io.Serializable;
 
 public class Life implements LifeInterface, Serializable{
     private int[][] grid;
-    private LifeFileManager fileMGMT;
+    private LifeFileManager fileMGMT; //Needs to be an object because a new temp
+                                      //file needs to be generated for each Life
+                                      //Object
     
     /**
      * Constructor - initializes an empty blank grid
