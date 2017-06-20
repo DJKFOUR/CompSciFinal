@@ -8,14 +8,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author vanhk5054
  */
-public class SaveLoad {
+public class LifeFileManager {
 
     private static JFileChooser fileChooser;
     private static final FileNameExtensionFilter filter = new FileNameExtensionFilter("Life file", new String[]{"life"});
     private static int[][] loadedGrid;
     private File temp;
     
-    public SaveLoad() {
+    public LifeFileManager() {
         try {
             temp = File.createTempFile("life", ".tmp");
             System.out.println("Temp file : " + temp.getAbsolutePath());

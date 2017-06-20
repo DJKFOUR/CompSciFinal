@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public class Life implements LifeInterface, Serializable{
     private int[][] grid;
-    private SaveLoad fileMGMT = new SaveLoad();
+    private LifeFileManager fileMGMT;
     
     /**
      * Constructor - initializes an empty blank grid
@@ -17,6 +17,7 @@ public class Life implements LifeInterface, Serializable{
      */
     public Life(int s) {
         grid = new int[s][s];
+        fileMGMT = new LifeFileManager();
         for (int row = 0; row < grid.length; row++) {
             for (int col = 0; col < grid[0].length; col++) {
                 grid[row][col] = 0;
