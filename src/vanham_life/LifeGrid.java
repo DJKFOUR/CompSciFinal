@@ -12,7 +12,7 @@ import javax.swing.*;
  */
 public class LifeGrid extends JPanel {
     
-    private static File temp;
+//    private static File temp;
     private static final int GAME_SIZE = 20;
     private static final int RECT_WIDTH = 20;
     private static final int RECT_HEIGHT = RECT_WIDTH;
@@ -21,14 +21,14 @@ public class LifeGrid extends JPanel {
     private Life game;
 
     public LifeGrid() {
-        try {
-            temp = File.createTempFile("life", ".tmp");
-            System.out.println("Temp file : " + temp.getAbsolutePath());
-        } catch (IOException exception) {
-            System.out.println("Problem with input/output.");
-            System.err.println("IOException: " + exception.getMessage());
-        }
-        temp.deleteOnExit();
+//        try {
+//            temp = File.createTempFile("life", ".tmp");
+//            System.out.println("Temp file : " + temp.getAbsolutePath());
+//        } catch (IOException exception) {
+//            System.out.println("Problem with input/output.");
+//            System.err.println("IOException: " + exception.getMessage());
+//        }
+//        temp.deleteOnExit();
         game = new Life(GAME_SIZE);
         setBackground(Color.BLACK);
         addMouseListener(new MouseAdapter() {
@@ -100,55 +100,57 @@ public class LifeGrid extends JPanel {
     }
     
     public void saveTemp() {
-        try {
-            
-            /* write objects */
-            FileOutputStream out = new FileOutputStream(temp);
-            ObjectOutputStream writeLife = new ObjectOutputStream(out);
-
-            writeLife.writeObject(game);
-
-            writeLife.close();
-            out.close();
-
-            System.out.println("Temp file updated.");
-
-        } catch (FileNotFoundException e) {
-            System.out.println("File could not be found.");
-            System.err.println("FileNotFoundException: "
-                    + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Problem with input/output.");
-            System.err.println("IOException: " + e.getMessage());
-        }
+//        try {
+//            
+//            /* write objects */
+//            FileOutputStream out = new FileOutputStream(temp);
+//            ObjectOutputStream writeLife = new ObjectOutputStream(out);
+//
+//            writeLife.writeObject(game);
+//
+//            writeLife.close();
+//            out.close();
+//
+//            System.out.println("Temp file updated.");
+//
+//        } catch (FileNotFoundException e) {
+//            System.out.println("File could not be found.");
+//            System.err.println("FileNotFoundException: "
+//                    + e.getMessage());
+//        } catch (IOException e) {
+//            System.out.println("Problem with input/output.");
+//            System.err.println("IOException: " + e.getMessage());
+//        }
+        game.saveTemp();
     }
     
     public void loadTemp() {
-        try {
-            
-            /* read objects */
-            FileInputStream in = new FileInputStream(temp);
-            ObjectInputStream readLife = new ObjectInputStream(in);
-
-            game = (Life)readLife.readObject();
-
-            readLife.close();
-            in.close();
-
-            System.out.println("Data read from file.");
-
-        } catch (FileNotFoundException e) {
-            System.out.println("File could not be found.");
-            System.err.println("FileNotFoundException: "
-                    + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Problem with input/output.");
-            System.err.println("IOException: " + e.getMessage());
-        } catch (ClassNotFoundException e) {
-            System.out.println("Class could not be used to cast object.");
-            System.err.println("ClassNotFoundException: "
-                    + e.getMessage());
-        }
+//        try {
+//            
+//            /* read objects */
+//            FileInputStream in = new FileInputStream(temp);
+//            ObjectInputStream readLife = new ObjectInputStream(in);
+//
+//            game = (Life)readLife.readObject();
+//
+//            readLife.close();
+//            in.close();
+//
+//            System.out.println("Data read from file.");
+//
+//        } catch (FileNotFoundException e) {
+//            System.out.println("File could not be found.");
+//            System.err.println("FileNotFoundException: "
+//                    + e.getMessage());
+//        } catch (IOException e) {
+//            System.out.println("Problem with input/output.");
+//            System.err.println("IOException: " + e.getMessage());
+//        } catch (ClassNotFoundException e) {
+//            System.out.println("Class could not be used to cast object.");
+//            System.err.println("ClassNotFoundException: "
+//                    + e.getMessage());
+//        }
+        game.loadTemp();
         repaint();
     }
     
