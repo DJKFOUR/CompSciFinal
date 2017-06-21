@@ -35,7 +35,7 @@ public class SaveLoadManager {
             writeLife.close();
             out.close();
 
-            System.out.println("Data written to file.");
+            System.out.println("SL Data written to file.");
 
         } catch (FileNotFoundException e) {
             System.out.println("File could not be found.");
@@ -60,7 +60,7 @@ public class SaveLoadManager {
             readLife.close();
             in.close();
 
-            System.out.println("Data read from file.");
+            System.out.println("SL Data read from file.");
 
         } catch (FileNotFoundException e) {
             System.out.println("File could not be found.");

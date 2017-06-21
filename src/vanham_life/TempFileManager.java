@@ -38,7 +38,7 @@ public class TempFileManager {
             writeLife.close();
             out.close();
 
-            System.out.println("Data written to file.");
+            System.out.println("Default data written to temp file.");
 
         } catch (FileNotFoundException e) {
             System.out.println("File could not be found.");
@@ -62,7 +62,7 @@ public class TempFileManager {
             writeLife.close();
             out.close();
 
-            System.out.println("Data written to file.");
+            System.out.println("Data written to temp file.");
 
         } catch (FileNotFoundException e) {
             System.out.println("File could not be found.");
@@ -86,7 +86,7 @@ public class TempFileManager {
             readLife.close();
             in.close();
 
-            System.out.println("Data read from file.");
+            System.out.println("Data read from temp file.");
 
         } catch (FileNotFoundException e) {
             System.out.println("File could not be found.");
