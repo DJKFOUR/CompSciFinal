@@ -27,7 +27,7 @@ public class TempFileManager {
      */
     public TempFileManager(int gridSize) {
         try {
-            temp = File.createTempFile("life", ".tmp");
+            temp = File.createTempFile("life", ".tmp"); //Create a temp file
             System.out.println("Temp file : " + temp.getAbsolutePath());
         } catch (IOException exception) {
             System.out.println("Problem with input/output.");

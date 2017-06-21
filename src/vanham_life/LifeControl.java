@@ -12,8 +12,8 @@ import javax.swing.border.*;
 public class LifeControl extends JPanel {
 
     private LifeGrid grid;
-    private JPanel buttons;
-    private JPanel counter;
+    private JPanel buttons = new JPanel();
+    private JPanel counter = new JPanel();
     private JButton save, load, step, clear, run, recall;
     private JButton red, orange, yellow, green, blue, purple, teal;
     private JLabel generationCounter;
@@ -38,12 +38,8 @@ public class LifeControl extends JPanel {
         setBorder(new CompoundBorder(new TitledBorder(new LineBorder(TEAL, 3, true), "MENU", TitledBorder.CENTER,TitledBorder.DEFAULT_POSITION, new Font("Century Gothic", Font.PLAIN, 12), TEAL), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         
-        buttons = new JPanel();
         buttons.setLayout(new GridLayout(0, 2, 10, 10));
         buttons.setOpaque(false);
-        
-        counter = new JPanel();
-        counter.setOpaque(false);
 
         save = new JButton("Save");
         save.setFont(new Font("Century Gothic", Font.PLAIN, 12));
@@ -103,7 +99,7 @@ public class LifeControl extends JPanel {
         recall.setFocusPainted(false);
         recall.addActionListener(new BtnListener());
         recall.setActionCommand("recall");
-        recall.setVisible(false);
+        recall.setVisible(false); //Not shown by default
         buttons.add(recall);
 
         red = new JButton("");
@@ -162,7 +158,9 @@ public class LifeControl extends JPanel {
         purple.setActionCommand("purple");
         buttons.add(purple);
         
-        generationCounter = new JLabel(" ");
+        counter.setOpaque(false);
+        
+        generationCounter = new JLabel("Generation: " + generationNum);
         generationCounter.setFont(new Font("Century Gothic", Font.PLAIN, 12));
         generationCounter.setForeground(TEAL);
         counter.add(generationCounter);
@@ -191,7 +189,7 @@ public class LifeControl extends JPanel {
                 case "load":
                     grid.load();
                     generationNum = 0;
-                    generationCounter.setText(" ");
+                    generationCounter.setText("Generation: " + generationNum);
                     break;
                 case "step":
                     grid.step();
@@ -212,7 +210,8 @@ public class LifeControl extends JPanel {
                     run.setFont(new Font("Century Gothic", Font.BOLD, 12));
                     run.setBackground(Color.RED);
                     run.setForeground(Color.BLACK);
-                    run.setActionCommand("stop");
+                    run.setActionCommand("stop"); //Set button to stop timer
+                                                  //instead of start
                     System.out.println("Timer Running: " + timer.isRunning());
                     break;
                 case "stop":
@@ -222,13 +221,14 @@ public class LifeControl extends JPanel {
                     run.setFont(new Font("Century Gothic", Font.PLAIN, 12));
                     run.setBackground(GRAY);
                     run.setForeground(TEAL);
-                    run.setActionCommand("run");
+                    run.setActionCommand("run"); //Set button to start timer
+                                                 //instead of stop
                     System.out.println("Timer Running: " + timer.isRunning());
                     break;
                 case "recall":
                     grid.loadTemp();
                     generationNum = 0;
-                    generationCounter.setText(" ");
+                    generationCounter.setText("Generation: " + generationNum);
                     break;
                 case "red":
                     grid.setColour(Color.RED);
@@ -267,8 +267,8 @@ public class LifeControl extends JPanel {
          */
         @Override
         public void actionPerformed(ActionEvent event) {
-            if (!grid.isEmpty()) {
-                if (generationNum > 999) {
+            if (!grid.isEmpty()) { //If the grid has something alive still
+                if (generationNum > 999) { //Prevent from running indefinitely
                     timer.stop();
                     recall.setVisible(true);
                     run.setText("Run");

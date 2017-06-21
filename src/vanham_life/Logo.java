@@ -15,16 +15,18 @@ public class Logo extends JPanel {
     private JLabel logo;
     
     /**
-     * Constructor - Initializes and creates a logo image in the form of a JPanel
+     * Constructor - Initializes and creates a logo image in the form of a
+     * JPanel
      * 
      * Pre: none
      * Post: A Logo JPanel has been created
      */
     public Logo() {
-        ImageIcon imageIcon = new ImageIcon("logo.png"); // load the image to a imageIcon
-        Image image = imageIcon.getImage(); // transform it 
-        Image newimg = image.getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-        imageIcon = new ImageIcon(newimg);  // transform it back
+        ImageIcon imageIcon = new ImageIcon("logo.png"); //load the image to a
+                                                         //imageIcon
+        Image image = imageIcon.getImage(); //transform it 
+        Image newimg = image.getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH); //scale it  
+        imageIcon = new ImageIcon(newimg);  //transform it back
 
         logo = new JLabel(imageIcon);
         logo.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));

@@ -159,7 +159,8 @@ public class Sorts {
 
     /**
      * Merges two sorted portion of items array
-     * pre: items[start..mid] is sorted. items[mid+1..end] sorted. start <= mid <= end
+     * pre: items[start..mid] is sorted. items[mid+1..end] sorted.
+     * start <= mid <= end
      * post: items[start..end] is sorted.
      */
     private static void merge(int[] items, int start, int mid, int end) {
@@ -199,7 +200,8 @@ public class Sorts {
 
     /**
      * Merges two sorted portion of items array
-     * pre: items[start..mid] is sorted. items[mid+1..end] sorted. start <= mid <= end
+     * pre: items[start..mid] is sorted. items[mid+1..end] sorted.
+     * start <= mid <= end
      * post: items[start..end] is sorted.
      */
     private static void merge(Comparable[] items, int start, int mid, int end) {
@@ -239,7 +241,8 @@ public class Sorts {
 
     /**
      * Merges two sorted portion of items array
-     * pre: items[start..mid] is sorted. items[mid+1..end] sorted. start <= mid <= end
+     * pre: items[start..mid] is sorted. items[mid+1..end] sorted.
+     * start <= mid <= end
      * post: items[start..end] is sorted.
      */
     private static void merge(ArrayList<Comparable> items, int start, int mid, int end) {

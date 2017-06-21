@@ -30,10 +30,10 @@ public class LifeGrid extends JPanel {
         setBackground(Color.BLACK);
         addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                int x = e.getX() / RECT_WIDTH;
-                int y = e.getY() / RECT_HEIGHT;
-                if (game.getCell(y, x) == 1) {
+            public void mouseClicked(MouseEvent e) { //Mouse click event handler
+                int x = e.getX() / RECT_WIDTH; //get grid x cell
+                int y = e.getY() / RECT_HEIGHT; //get grid y cell
+                if (game.getCell(y, x) == 1) { //Toggle state of cell
                     game.setCell(y, x, 0);
                     System.out.println(x + "," + y + ": DEAD");
                 } else {
@@ -60,11 +60,11 @@ public class LifeGrid extends JPanel {
 
         for (int row = 0; row < GAME_SIZE; row++) {
             for (int col = 0; col < GAME_SIZE; col++) {
-                if (game.getCell(row, col) == 1) {
+                if (game.getCell(row, col) == 1) { //Paint cell state
                     g.setColor(colour);
                     g.fillRect(col * RECT_HEIGHT, row * RECT_WIDTH, RECT_WIDTH, RECT_HEIGHT);
                 }
-                g.setColor(Color.GRAY);
+                g.setColor(Color.GRAY); //paint lines(done by drawing outlines around cells)
                 g.drawRect(col * RECT_HEIGHT, row * RECT_WIDTH, RECT_WIDTH-1, RECT_HEIGHT-1);
             }
         }

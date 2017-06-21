@@ -23,7 +23,8 @@ public class SaveLoadManager {
      * @param grid = grid to save to a file
      */
     public static void save(int[][] grid) {
-        saveFile(getSaveFile(), grid);
+        saveFile(getSaveFile(), grid); //save to the file returned from the
+                                       //getSaveFile method
     }
     
     /**
@@ -35,7 +36,8 @@ public class SaveLoadManager {
      * @return int[][] = grid loaded with 1's and 0's gotten from the file
      */
     public static int[][] load() {
-        return loadFile(getLoadFile());
+        return loadFile(getLoadFile()); //load to the file returned from the
+                                        //getLoadFile method
     }
     
     /**
@@ -58,7 +60,7 @@ public class SaveLoadManager {
             writeLife.close();
             out.close();
 
-            System.out.println("SL Data written to file.");
+            System.out.println("Data written to file.");
 
         } catch (FileNotFoundException e) {
             System.out.println("File could not be found.");
@@ -90,7 +92,7 @@ public class SaveLoadManager {
             readLife.close();
             in.close();
 
-            System.out.println("SL Data read from file.");
+            System.out.println("Data read from file.");
 
         } catch (FileNotFoundException e) {
             System.out.println("File could not be found.");
@@ -125,7 +127,8 @@ public class SaveLoadManager {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             String fileName = selectedFile.getAbsolutePath();
-            if (!fileName.endsWith(".Life")) {
+            if (!fileName.endsWith(".Life")) { //Add *.Life extension if it
+                                               //doesn't exist
                 fileName = selectedFile.getAbsolutePath() + ".Life";
             }
             File saveFile = new File(fileName);

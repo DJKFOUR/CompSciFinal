@@ -11,7 +11,7 @@ public class GenerationRating implements ActionListener {
 
     private ImageIcon imageIcon = new ImageIcon("logo.png");
     private Life game = new Life(20, false);
-    private JFrame frame;
+    private JFrame frame = new JFrame("Life File Generation Rating");
     private JPanel contentPane = new JPanel();
     private JPanel controls = new JPanel();
     private JButton load, rate;
@@ -29,7 +29,6 @@ public class GenerationRating implements ActionListener {
      * post: A GenerationRating object has been created
      */
     public GenerationRating() {
-        frame = new JFrame("Life File Generation Rating");
         frame.setIconImage(imageIcon.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -113,11 +112,11 @@ public class GenerationRating implements ActionListener {
                 for (int i = gens.size() - 1; i >= 0; i--) { //Read list backwards(High to low)
                     listText += gens.get(i).toString();
                     if (i > 0) {
-                        listText += "\n";
+                        listText += "\n"; //Add data to a String
                     }
                 }
                 list.setFont(new Font("Century Gothic", Font.PLAIN, 12));
-                list.setText(listText);
+                list.setText(listText); //Display data
                 list.grabFocus();
                 list.setCaretPosition(0);
                 frame.pack();
