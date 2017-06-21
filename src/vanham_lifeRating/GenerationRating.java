@@ -12,8 +12,8 @@ public class GenerationRating implements ActionListener {
     private ImageIcon imageIcon = new ImageIcon("logo.png");
     private Life game = new Life(20, false);
     private JFrame frame;
-    private JPanel contentPane;
-    private JPanel controls;
+    private JPanel contentPane = new JPanel();
+    private JPanel controls = new JPanel();
     private JButton load, rate;
     private JTextArea list;
     private JScrollPane scroll;
@@ -32,12 +32,12 @@ public class GenerationRating implements ActionListener {
         frame = new JFrame("Life File Generation Rating");
         frame.setIconImage(imageIcon.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setContentPane(contentPane);
 
-        contentPane = new JPanel();
         contentPane.setBackground(new Color(50, 50, 50));
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-
-        controls = new JPanel();
+        
         controls.setOpaque(false);
         controls.setLayout(new GridLayout(1, 2, 10, 10));
         controls.setBorder(new CompoundBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10), new CompoundBorder(new LineBorder(TEAL, 3, true), BorderFactory.createEmptyBorder(5, 5, 5, 5))));
@@ -77,8 +77,6 @@ public class GenerationRating implements ActionListener {
 
         contentPane.add(controls);
 
-        frame.setResizable(false);
-        frame.setContentPane(contentPane);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

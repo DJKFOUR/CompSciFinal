@@ -27,6 +27,7 @@ public class LifeGUI {
         frame.setIconImage(imageIcon.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
+        frame.setContentPane(contentPane);
         
         contentPane.setBackground(new Color(50, 50, 50));
         contentPane.add(gameGrid);
@@ -35,11 +36,8 @@ public class LifeGUI {
         right.setOpaque(false);
         right.add(logo);
         right.add(gameControl);
-        
         contentPane.add(right);
         
-        frame.setResizable(false);
-        frame.add(contentPane);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
