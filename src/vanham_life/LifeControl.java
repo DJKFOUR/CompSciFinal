@@ -22,7 +22,15 @@ public class LifeControl extends JPanel {
     private static final Color GRAY = new Color(100, 100, 100);
     private static final Color TEAL = new Color(0, 250, 200);
     private static final Color PURPLE = new Color(182, 66, 244);
-
+    
+    /**
+     * Constructor - Creates and initializes the control panel
+     * 
+     * Pre: a LifeGrid object to control
+     * Post: a LifeControl object has been created
+     * 
+     * @param grid = LifeGrid to control
+     */
     public LifeControl(final LifeGrid grid) {
         this.grid = grid;
         
@@ -164,7 +172,15 @@ public class LifeControl extends JPanel {
     }
 
     class BtnListener implements ActionListener {
-
+        
+        /**
+         * Handle button click event
+         * 
+         * Pre: none
+         * Post: action performed
+         * 
+         * @param event = button event
+         */
         @Override
         public void actionPerformed(ActionEvent event) {
             String whichBtn = event.getActionCommand();
@@ -240,9 +256,17 @@ public class LifeControl extends JPanel {
     }
 
     class TimerListener implements ActionListener {
-
+        
+        /**
+         * Handle timer event
+         * 
+         * Pre: none
+         * Post: action performed
+         * 
+         * @param event = timer event
+         */
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent event) {
             if (!grid.isEmpty()) {
                 if (generationNum > 999) {
                     timer.stop();

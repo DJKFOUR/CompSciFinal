@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package vanham_life;
+package OldFiles_FromOriginalProject;
 
 import java.util.Scanner;
+import vanham_life.Life;
 
 /**
  *
@@ -13,13 +14,6 @@ import java.util.Scanner;
 public class Console {
 
     public static void main(String[] args) {
-        
-        /*
-        NOTE: When creating grids, preset or by user, always leave 1 unit
-              padding to ensure neighbour counting is correct.
-        */
-        
-        //Could make the grid over-sized and not print the edge.^ (Simple method)
         
         boolean run = true;
         int response;

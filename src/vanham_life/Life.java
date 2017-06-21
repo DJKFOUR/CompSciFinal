@@ -9,17 +9,23 @@ import java.io.Serializable;
 public class Life implements LifeInterface, Serializable {
 
     private int[][] grid;
-    TempFileManager tempMGMT;
+    private TempFileManager tempMGMT;
+    private boolean includeTemp;
 
     /**
      * Constructor - initializes an empty blank grid
-     *
-     * @param size sets grid dimensions
+     * 
+     * Pre: int size, boolean includeTemp
+     * Post: a Life object is created with the given size
+     * 
+     * @param size height/length of square grid
+     * @param includeTemp use temporary file system or not
      */
-    public Life(int s, boolean includeTemp) {
-        grid = new int[s][s];
+    public Life(int size, boolean includeTemp) {
+        this.includeTemp = includeTemp;
+        grid = new int[size][size];
         if (includeTemp) {
-            tempMGMT = new TempFileManager(s);
+            tempMGMT = new TempFileManager(size);
         }
         for (int row = 0; row < grid.length; row++) {
             for (int col = 0; col < grid[0].length; col++) {
@@ -29,20 +35,31 @@ public class Life implements LifeInterface, Serializable {
     }
 
     /**
-     * Constructor - initializes a grid
-     *
-     * @param size sets grid dimensions
+     * Constructor - initializes an empty blank grid
+     * 
+     * Pre: int[][] grid, boolean includeTemp
+     * Post: a Life object is created with the given size
+     * 
+     * @param grid a int[][] loaded with 1's and 0's to create a Life object with
+     * @param includeTemp use temporary file system or not
      */
-    public Life(int[][] g) {
-        grid = g;
+    public Life(int[][] grid, boolean includeTemp) {
+        this.includeTemp = includeTemp;
+        if (includeTemp) {
+            tempMGMT = new TempFileManager(grid.length);
+        }
+        this.grid = grid;
     }
 
     /**
      * Return cell state at specified Row and Column
-     *
-     * @param row
-     * @param col
-     * @return
+     * 
+     * Pre: a row and column to get the cell state of
+     * Post: cell state is returned in integer form(1=alive, 0=dead)
+     * 
+     * @param row = row to use
+     * @param col = column to use
+     * @return cell state in integer form
      */
     public int getCell(int row, int col) {
         return grid[row][col];
@@ -50,21 +67,36 @@ public class Life implements LifeInterface, Serializable {
 
     /**
      * Set cell at specified Row and Column to specified Value
+     * 
+     * Pre: a row and column to set the cell state of, a value to set the cell to
+     * Post: cell at position (row,col) is set to the specified value
      *
-     * @param row
-     * @param col
-     * @param value
+     * @param row = row to use
+     * @param col = column to use
+     * @param value = value to set the cell to
      */
     public void setCell(int row, int col, int value) {
         grid[row][col] = value;
     }
-
+    
+    
+    /**
+     * Returns the size of the grid (one dimension of the square)
+     * 
+     * Pre: none
+     * Post: grid height/length is returned
+     * 
+     * @return grid size
+     */
     public int getSize() {
         return grid.length;
     }
 
     /**
-     * Set all grid cells to blank
+     * Kills all cells
+     * 
+     * Pre: none
+     * Post: all cells set to blank
      */
     @Override
     public void killAllCells() {
@@ -76,9 +108,9 @@ public class Life implements LifeInterface, Serializable {
     }
 
     /**
-     * Loads a start pattern to the grid
+     * Loads a pattern to the grid
      *
-     * @param newGrid a int [][] loaded with 1's and 0's
+     * @param newGrid a int[][] loaded with 1's and 0's too set the grid to
      */
     @Override
     public void setPattern(int[][] newGrid) {
@@ -92,11 +124,13 @@ public class Life implements LifeInterface, Serializable {
 
     /**
      * Counts how many adjacent cells are alive
+     * 
+     * Pre: a row and column to count the neighbours of
+     * Post: tally of neighbours has been returned
      *
-     * @param row = row address of test cell 0 < cellRow < gridSize - 1 @param
-     * col = column address of test cell 0 < cellCol < gridSize - 1
-     * @retur
-     * n int count of adjacent live cells
+     * @param row = row address of test cell 0 < cellRow < gridSize - 1
+     * @param col = column address of test cell 0 < cellCol < gridSize - 1
+     * @retur n int count of adjacent live cells
      */
     @Override
     public int countNeighbours(int row, int col) {
@@ -132,10 +166,14 @@ public class Life implements LifeInterface, Serializable {
     }
 
     /**
-     * @param row = row address of test cell * 0 < cellRow < gridSize - 1 @param
-     * col = column address of test cell 0 < cellCol < gridSize - 1
-     * @retur
-     * n int = state of cell, 1 for live, 0 for dead
+     * Applies the rules of the game to the cell
+     * 
+     * Pre: a row and column of the cell to use
+     * Post: new cell state has been returned
+     * 
+     * @param row = row address of test cell * 0 < cellRow < gridSize - 1
+     * @param col = column address of test cell 0 < cellCol < gridSize - 1
+     * @return int = state of cell, 1 for live, 0 for dead
      */
     @Override
     public int applyRules(int row, int col) {
@@ -157,6 +195,9 @@ public class Life implements LifeInterface, Serializable {
     /**
      * Moves the game ahead one step by reading the previous grid, applying the
      * rules, and creating a new grid.
+     * 
+     * Pre: none
+     * Post: game has been advanced
      */
     @Override
     public void takeStep() {
@@ -168,7 +209,16 @@ public class Life implements LifeInterface, Serializable {
         }
         setPattern(nextGen);
     }
-
+    
+    
+    /**
+     * Counts and returns the current population of the grid
+     * 
+     * Pre: none
+     * Post: population has been returned
+     * 
+     * @return = int number of live cells in the grid
+     */
     public int countPopulation() {
         int population = 0;
         for (int row = 0; row < grid.length; row++) {
@@ -180,27 +230,62 @@ public class Life implements LifeInterface, Serializable {
         }
         return population;
     }
-
+    
+    /**
+     * Saves a file
+     * 
+     * Pre: none
+     * Post: grid has been saved to a file
+     */
     public void save() {
         SaveLoadManager.save(grid);
     }
-
+    
+    /**
+     * Loads a file
+     * 
+     * Pre: none
+     * Post: a new grid has been loaded from a file
+     */
     public void load() {
         setPattern(SaveLoadManager.load());
     }
-
+    
+    /**
+     * Saves the temporary file if temporary file usage is in effect
+     * 
+     * Pre: none
+     * Post: grid has been saved to a temporary file
+     */
     public void saveTemp() {
-        tempMGMT.saveTemp(grid);
+        if (includeTemp) {
+            tempMGMT.saveTemp(grid);
+        } else {
+            System.out.println("Temp file not in use");
+        }
     }
-
+    
+    /**
+     * Loads the temporary file if temporary file usage is in effect
+     * 
+     * Pre: none
+     * Post: a grid has been loaded from a temporary file
+     */
     public void loadTemp() {
-        setPattern(tempMGMT.loadTemp());
+        if (includeTemp) {
+            setPattern(tempMGMT.loadTemp());
+        } else {
+            System.out.println("Temp file not in use");
+        }
     }
 
     /**
      * Creates a string representation of the grid
+     * 
+     * Pre: none
+     * Post: a string representing the object has been returned
      *
-     * @return String
+     * @return String = Life String 
      */
     @Override
     public String toString() {

@@ -2,7 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package vanham_life;
+package OldFiles_FromOriginalProject;
+
+import vanham_life.Life;
 
 /**
  *
@@ -81,7 +83,7 @@ public class LifeTests {
                 
         //Test Constructor and toString()
         System.out.println("Test Constructor");
-        Life game = new Life(emptyGrid); // create new game with blank grid
+        Life game = new Life(emptyGrid, false); // create new game with blank grid
         System.out.println("expected  10x10 grid o's");
         System.out.println(game); // prints 10 x10 grid of 0's
         
@@ -121,7 +123,7 @@ public class LifeTests {
         game.setPattern(testGrid); // sets game to test grid
         game.takeStep();
         
-        Life expectedGame = new Life(makeCompareGrid());        
+        Life expectedGame = new Life(makeCompareGrid(), false);        
         String actual = game.toString();
         //System.out.println (actual + "\n");
         String expected = expectedGame.toString();

@@ -17,8 +17,13 @@ public class LifeGUI {
     private static JPanel right = new JPanel();
     private static JFrame frame = new JFrame("LIFE");
 
+    /**
+     * Creates and shows the GUI
+     * 
+     * Pre: none
+     * Post: a life GUI is displayed
+     */
     private static void createAndShowGui() {
-
         frame.setIconImage(imageIcon.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -35,7 +40,7 @@ public class LifeGUI {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
