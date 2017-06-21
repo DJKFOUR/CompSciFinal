@@ -9,31 +9,35 @@ import javax.swing.*;
  */
 public class LifeGUI {
 
-    private static ImageIcon imageIcon = new ImageIcon("logo.png");
-    private static JPanel contentPane = new JPanel();
-    private static LifeGrid gameGrid = new LifeGrid();
-    private static Logo logo = new Logo();
-    private static LifeControl gameControl = new LifeControl(gameGrid);
-    private static JPanel right = new JPanel();
-    private static JFrame frame = new JFrame("LIFE");
+    private ImageIcon imageIcon = new ImageIcon("logo.png");
+    private JPanel contentPane = new JPanel();
+    private LifeGrid gameGrid = new LifeGrid();
+    private Logo logo = new Logo();
+    private LifeControl gameControl = new LifeControl(gameGrid);
+    private JPanel right = new JPanel();
+    private JFrame frame = new JFrame("LIFE");
 
     /**
-     * Creates and shows the GUI
+     * Creates initializes a LifeGUI object
      * 
      * Pre: none
-     * Post: a life GUI is displayed
+     * Post: a LifeGUI is created
      */
-    private static void createAndShowGui() {
+    public LifeGUI() {
         frame.setIconImage(imageIcon.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
+        
         contentPane.setBackground(new Color(50, 50, 50));
         contentPane.add(gameGrid);
+        
         right.setLayout(new BoxLayout(right, BoxLayout.Y_AXIS));
         right.setOpaque(false);
         right.add(logo);
         right.add(gameControl);
+        
         contentPane.add(right);
+        
         frame.setResizable(false);
         frame.add(contentPane);
         frame.pack();
@@ -41,11 +45,21 @@ public class LifeGUI {
         frame.setVisible(true);
     }
     
+    /**
+     * Creates and shows the GUI
+     * 
+     * Pre: none
+     * Post: a life GUI is displayed
+     */
+    private static void runGUI() {
+        JFrame.setDefaultLookAndFeelDecorated(false);
+        LifeGUI life = new LifeGUI();
+    }
+
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                createAndShowGui();
+                runGUI();
             }
         });
     }

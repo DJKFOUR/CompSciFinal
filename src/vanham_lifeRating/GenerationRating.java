@@ -9,18 +9,18 @@ import vanham_life.Life;
 
 public class GenerationRating implements ActionListener {
 
-    private static ImageIcon imageIcon = new ImageIcon("logo.png");
-    private static Life game = new Life(20, false);
-    private static JFrame frame;
-    private static JPanel contentPane;
-    private static JPanel controls;
-    private static JButton load, rate;
-    private static JTextArea list;
-    private static JScrollPane scroll;
+    private ImageIcon imageIcon = new ImageIcon("logo.png");
+    private Life game = new Life(20, false);
+    private JFrame frame;
+    private JPanel contentPane;
+    private JPanel controls;
+    private JButton load, rate;
+    private JTextArea list;
+    private JScrollPane scroll;
     private static final Color GRAY = new Color(100, 100, 100);
     private static final Color TEAL = new Color(0, 250, 200);
     private static int generationNum = 0;
-    private static ArrayList gens = new <Generation>ArrayList();
+    private ArrayList gens = new <Generation>ArrayList();
     
     /**
      * Constructor - Creates and initializes a GenerationRating Object
@@ -141,9 +141,6 @@ public class GenerationRating implements ActionListener {
     }
 
     public static void main(String[] args) {
-
-        /* Methods that create and show a GUI should be
-         run from an event-dispatching thread */
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 runGUI();

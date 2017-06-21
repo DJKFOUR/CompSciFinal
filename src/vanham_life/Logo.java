@@ -12,7 +12,6 @@ import javax.swing.*;
  * @author vanhk5054
  */
 public class Logo extends JPanel {
-
     private JLabel logo;
     
     /**
