@@ -14,7 +14,7 @@ public class LifeGrid extends JPanel {
     private static final int GAME_SIZE = 20;
     private static final int RECT_WIDTH = 20;
     private static final int RECT_HEIGHT = RECT_WIDTH;
-    static final Color TEAL = new Color(0, 250, 200);
+    private static final Color TEAL = new Color(0, 250, 200);
     private static Color colour = TEAL;
     private Life game;
     

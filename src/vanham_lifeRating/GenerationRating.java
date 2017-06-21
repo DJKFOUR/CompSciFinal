@@ -21,9 +21,14 @@ public class GenerationRating implements ActionListener {
     private static final Color TEAL = new Color(0, 250, 200);
     private static int generationNum = 0;
     private static ArrayList gens = new <Generation>ArrayList();
-
+    
+    /**
+     * Constructor - Creates and initializes a GenerationRating Object
+     * 
+     * Pre: none
+     * post: A GenerationRating object has been created
+     */
     public GenerationRating() {
-
         frame = new JFrame("Life File Generation Rating");
         frame.setIconImage(imageIcon.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,7 +83,15 @@ public class GenerationRating implements ActionListener {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
-
+    
+    /**
+         * Handle button click event
+         * 
+         * Pre: none
+         * Post: action performed
+         * 
+         * @param event = button event
+         */
     @Override
     public void actionPerformed(ActionEvent event) {
         String whichBtn = event.getActionCommand();
@@ -115,7 +128,13 @@ public class GenerationRating implements ActionListener {
         }
 
     }
-
+    
+    /**
+     * Creates and shows the GUI
+     * 
+     * Pre: none
+     * Post: a GenerationRating GUI is displayed
+     */
     private static void runGUI() {
         JFrame.setDefaultLookAndFeelDecorated(false);
         GenerationRating ranking = new GenerationRating();

@@ -12,7 +12,7 @@ import java.io.*;
  * @author Kyle
  */
 public class TempFileManager {
-    private static int[][] loadedGrid;
+    private int[][] loadedGrid;
     
     private File temp;
     

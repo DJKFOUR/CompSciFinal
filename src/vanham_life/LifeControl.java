@@ -12,11 +12,11 @@ import javax.swing.border.*;
 public class LifeControl extends JPanel {
 
     private LifeGrid grid;
-    private JPanel buttons;
-    private JPanel counter;
-    private JButton save, load, step, clear, run, recall;
-    private JButton red, orange, yellow, green, blue, purple, teal;
-    private JLabel generationCounter;
+    private static JPanel buttons;
+    private static JPanel counter;
+    private static JButton save, load, step, clear, run, recall;
+    private static JButton red, orange, yellow, green, blue, purple, teal;
+    private static JLabel generationCounter;
     private int generationNum = 0;
     private Timer timer = new Timer(250, new TimerListener());
     private static final Color GRAY = new Color(100, 100, 100);
