@@ -14,7 +14,13 @@ import javax.swing.*;
 public class Logo extends JPanel {
 
     private JLabel logo;
-
+    
+    /**
+     * Constructor - Initializes and creates a logo image in the form of a JPanel
+     * 
+     * Pre: none
+     * Post: A Logo JPanel has been created
+     */
     public Logo() {
         ImageIcon imageIcon = new ImageIcon("logo.png"); // load the image to a imageIcon
         Image image = imageIcon.getImage(); // transform it 

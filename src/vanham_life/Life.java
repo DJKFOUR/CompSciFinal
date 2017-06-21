@@ -232,7 +232,7 @@ public class Life implements LifeInterface, Serializable {
     }
     
     /**
-     * Saves a file
+     * Saves the grid to a file of the user's decision
      * 
      * Pre: none
      * Post: grid has been saved to a file
@@ -242,10 +242,10 @@ public class Life implements LifeInterface, Serializable {
     }
     
     /**
-     * Loads a file
+     * Loads a file from a path of the user's decision
      * 
      * Pre: none
-     * Post: a new grid has been loaded from a file
+     * Post: grid has been loaded from a file 
      */
     public void load() {
         setPattern(SaveLoadManager.load());

@@ -116,9 +116,6 @@ public class GenerationRating implements ActionListener {
 
     }
 
-    /**
-     * Create and show the GUI.
-     */
     private static void runGUI() {
         JFrame.setDefaultLookAndFeelDecorated(false);
         GenerationRating ranking = new GenerationRating();

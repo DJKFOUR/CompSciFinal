@@ -16,6 +16,15 @@ public class TempFileManager {
     
     private File temp;
     
+    /**
+     * Constructor - Creates and initializes a TempFileManager object with the
+     * given grid size and a blank grid
+     * 
+     * Pre: a grid size(one dimension of a square)
+     * Post: A TempFileManager object has been created
+     * 
+     * @param gridSize = the size of grid which will be written to the temp file
+     */
     public TempFileManager(int gridSize) {
         try {
             temp = File.createTempFile("life", ".tmp");
@@ -50,10 +59,16 @@ public class TempFileManager {
         }
     }
     
+    /**
+     * Saves the given data to the temp file
+     * 
+     * Pre: int[][] data loaded with 1's and 0's
+     * Post: int[] data has been saved to the temp file
+     * 
+     * @param grid = int[][] grid loaded with 1's and 0's
+     */
     public void saveTemp(int[][] grid) {
         try {
-
-            /* write objects */
             FileOutputStream out = new FileOutputStream(temp);
             ObjectOutputStream writeLife = new ObjectOutputStream(out);
 
@@ -73,11 +88,17 @@ public class TempFileManager {
             System.err.println("IOException: " + e.getMessage());
         }
     }
-
+    
+    /**
+     * Loads the data from the temp file
+     * 
+     * Pre: none
+     * Post: int[][] data has been loaded from the temp file and returned
+     * 
+     * @return int[][] grid loaded with 1's and 0's
+     */
     public int[][] loadTemp() {
         try {
-
-            /* read objects */
             FileInputStream in = new FileInputStream(temp);
             ObjectInputStream readLife = new ObjectInputStream(in);
 
@@ -100,7 +121,6 @@ public class TempFileManager {
             System.err.println("ClassNotFoundException: "
                     + e.getMessage());
         }
-
         return loadedGrid;
     }
 }
