@@ -25,7 +25,7 @@ public class Console {
         int response;
         int[][]blinker = new int[5][5];
         int[][]glider = new int[10][10];
-        Life game = new Life(10);
+        Life game = new Life(10, false);
         Scanner in = new Scanner(System.in);
         
         //Set Blinker pattern

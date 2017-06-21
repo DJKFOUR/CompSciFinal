@@ -8,33 +8,21 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author vanhk5054
  */
-public class LifeFileManager {
+public class SaveLoadManager {
 
     private static JFileChooser fileChooser;
     private static final FileNameExtensionFilter filter = new FileNameExtensionFilter("Life file", new String[]{"life"});
     private static int[][] loadedGrid;
-    private File temp;
-    
-    public LifeFileManager() {
-        try {
-            temp = File.createTempFile("life", ".tmp");
-            System.out.println("Temp file : " + temp.getAbsolutePath());
-        } catch (IOException exception) {
-            System.out.println("Problem with input/output.");
-            System.err.println("IOException: " + exception.getMessage());
-        }
-        temp.deleteOnExit();
-    }
 
-    public void save(int[][] grid) {
+    public static void save(int[][] grid) {
         saveFile(getSaveFile(), grid);
     }
 
-    public int[][] load() {
+    public static int[][] load() {
         return loadFile(getLoadFile());
     }
 
-    private void saveFile(File f, int[][] grid) {
+    private static void saveFile(File f, int[][] grid) {
         try {
             File lifeFile = f;
 
@@ -59,7 +47,7 @@ public class LifeFileManager {
         }
     }
 
-    private int[][] loadFile(File f) {
+    private static int[][] loadFile(File f) {
         try {
             File lifeFile = f;
 
@@ -86,11 +74,10 @@ public class LifeFileManager {
             System.err.println("ClassNotFoundException: "
                     + e.getMessage());
         }
-
         return loadedGrid;
     }
 
-    private File getSaveFile() {
+    private static File getSaveFile() {
         int returnValue;
         fileChooser = new JFileChooser();
         fileChooser.setFileFilter(filter);
@@ -110,7 +97,7 @@ public class LifeFileManager {
         }
     }
 
-    private File getLoadFile() {
+    private static File getLoadFile() {
         int returnValue;
         fileChooser = new JFileChooser();
         fileChooser.setFileFilter(filter);
@@ -123,59 +110,5 @@ public class LifeFileManager {
         } else {
             return null;
         }
-    }
-    
-    public void saveTemp(int[][] grid) {
-        try {
-
-            /* write objects */
-            FileOutputStream out = new FileOutputStream(temp);
-            ObjectOutputStream writeLife = new ObjectOutputStream(out);
-
-            writeLife.writeObject(grid);
-
-            writeLife.close();
-            out.close();
-
-            System.out.println("Data written to file.");
-
-        } catch (FileNotFoundException e) {
-            System.out.println("File could not be found.");
-            System.err.println("FileNotFoundException: "
-                    + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Problem with input/output.");
-            System.err.println("IOException: " + e.getMessage());
-        }
-    }
-
-    public int[][] loadTemp() {
-        try {
-
-            /* read objects */
-            FileInputStream in = new FileInputStream(temp);
-            ObjectInputStream readLife = new ObjectInputStream(in);
-
-            loadedGrid = (int[][])readLife.readObject();
-
-            readLife.close();
-            in.close();
-
-            System.out.println("Data read from file.");
-
-        } catch (FileNotFoundException e) {
-            System.out.println("File could not be found.");
-            System.err.println("FileNotFoundException: "
-                    + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Problem with input/output.");
-            System.err.println("IOException: " + e.getMessage());
-        } catch (ClassNotFoundException e) {
-            System.out.println("Class could not be used to cast object.");
-            System.err.println("ClassNotFoundException: "
-                    + e.getMessage());
-        }
-
-        return loadedGrid;
     }
 }

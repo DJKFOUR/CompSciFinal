@@ -19,7 +19,7 @@ public class LifeGrid extends JPanel {
     private Life game;
 
     public LifeGrid() {
-        game = new Life(GAME_SIZE);
+        game = new Life(GAME_SIZE, true);
         setBackground(Color.BLACK);
         addMouseListener(new MouseAdapter() {
             @Override

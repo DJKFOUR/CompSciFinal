@@ -10,7 +10,7 @@ import vanham_life.Life;
 public class GenerationRating implements ActionListener {
 
     private static ImageIcon imageIcon = new ImageIcon("logo.png");
-    private static Life game = new Life(20);
+    private static Life game = new Life(20, false);
     private static JFrame frame;
     private static JPanel contentPane;
     private static JPanel controls;
