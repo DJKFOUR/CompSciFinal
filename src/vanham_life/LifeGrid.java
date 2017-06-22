@@ -41,7 +41,7 @@ public class LifeGrid extends JPanel {
                     System.out.println(x + "," + y + ": Alive");
                 }
                 repaint();
-                saveTemp();
+                game.saveTemp();
             }
         });
     }
@@ -151,17 +151,6 @@ public class LifeGrid extends JPanel {
     public void load() {
         game.load();
         repaint();
-        saveTemp();
-    }
-    
-    /**
-     * Saves the temporary file if temporary file usage is in effect
-     * 
-     * Pre: none
-     * Post: grid has been saved to a temporary file
-     */
-    public void saveTemp() {
-        game.saveTemp();
     }
     
     /**

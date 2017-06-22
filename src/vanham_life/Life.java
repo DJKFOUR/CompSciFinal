@@ -258,7 +258,13 @@ public class Life implements LifeInterface, Serializable {
      * Post: grid has been loaded from a file 
      */
     public void load() {
-        setPattern(SaveLoadManager.load());
+        int[][] newGrid = SaveLoadManager.load();
+        if (newGrid != null) {
+            setPattern(newGrid);
+        } else {
+            System.out.println("No grid retrieved"); //Couldn't get exception
+                                                     //handler to work
+        }
     }
     
     /**
@@ -284,6 +290,7 @@ public class Life implements LifeInterface, Serializable {
     public void loadTemp() {
         if (includeTemp) {
             setPattern(tempMGMT.loadTemp());
+            saveTemp();
         } else {
             System.out.println("Temp file not in use");
         }

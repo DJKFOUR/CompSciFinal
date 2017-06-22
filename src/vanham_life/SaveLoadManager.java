@@ -50,28 +50,30 @@ public class SaveLoadManager {
      * @param grid = data to use (grid loaded with 1's and 0's)
      */
     private static void saveFile(File f, int[][] grid) {
-        try {
-            File lifeFile = f;
-            FileOutputStream out = new FileOutputStream(lifeFile);
-            ObjectOutputStream writeLife = new ObjectOutputStream(out);
+        if (f != null) {
+            try {
+                File lifeFile = f;
+                FileOutputStream out = new FileOutputStream(lifeFile);
+                ObjectOutputStream writeLife = new ObjectOutputStream(out);
 
-            writeLife.writeObject(grid);
+                writeLife.writeObject(grid);
 
-            writeLife.close();
-            out.close();
+                writeLife.close();
+                out.close();
 
-            System.out.println("Data written to file.");
+                System.out.println("Data written to file.");
 
-        } catch (FileNotFoundException e) {
-            System.out.println("File could not be found.");
-            System.err.println("FileNotFoundException: "
-                    + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Problem with input/output.");
-            System.err.println("IOException: " + e.getMessage());
-        } catch (NullPointerException e) {
-            System.out.println("Null pointer exception.");
-            System.err.println("IOException: " + e.getMessage());
+            } catch (FileNotFoundException e) {
+                System.out.println("File could not be found.");
+                System.err.println("FileNotFoundException: "
+                        + e.getMessage());
+            } catch (IOException e) {
+                System.out.println("Problem with input/output.");
+                System.err.println("IOException: " + e.getMessage());
+            }
+        } else {
+            System.out.println("No flie selected."); //Couldn't get exception
+                                                     //handler to work
         }
     }
     
@@ -85,34 +87,35 @@ public class SaveLoadManager {
      * @return int[][] grid loaded with 1's and 0's
      */
     private static int[][] loadFile(File f) {
-        try {
-            File lifeFile = f;
-            FileInputStream in = new FileInputStream(lifeFile);
-            ObjectInputStream readLife = new ObjectInputStream(in);
+        if (f != null) {
+            try {
+                File lifeFile = f;
+                FileInputStream in = new FileInputStream(lifeFile);
+                ObjectInputStream readLife = new ObjectInputStream(in);
 
-            loadedGrid = (int[][])readLife.readObject();
+                loadedGrid = (int[][]) readLife.readObject();
 
-            readLife.close();
-            in.close();
+                readLife.close();
+                in.close();
 
-            System.out.println("Data read from file.");
+                System.out.println("Data read from file.");
 
-        } catch (FileNotFoundException e) {
-            System.out.println("File could not be found.");
-            System.err.println("FileNotFoundException: "
-                    + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Problem with input/output.");
-            System.err.println("IOException: " + e.getMessage());
-        } catch (ClassNotFoundException e) {
-            System.out.println("Class could not be used to cast object.");
-            System.err.println("ClassNotFoundException: "
-                    + e.getMessage());
-        } catch (NullPointerException e) {
-            System.out.println("Null pointer exception.");
-            System.err.println("IOException: " + e.getMessage());
+            } catch (FileNotFoundException e) {
+                System.out.println("File could not be found.");
+                System.err.println("FileNotFoundException: "
+                        + e.getMessage());
+            } catch (IOException e) {
+                System.out.println("Problem with input/output.");
+                System.err.println("IOException: " + e.getMessage());
+            } catch (ClassNotFoundException e) {
+                System.out.println("Class could not be used to cast object.");
+                System.err.println("ClassNotFoundException: "
+                        + e.getMessage());
+            }
+            return loadedGrid;
+        } else {
+            return null;
         }
-        return loadedGrid;
     }
     
     /**
@@ -140,7 +143,7 @@ public class SaveLoadManager {
             File saveFile = new File(fileName);
             return saveFile;
         } else {
-            return null;
+            return null; //If null is returned, it is handled in saveFile()
         }
     }
     
@@ -163,7 +166,7 @@ public class SaveLoadManager {
             File selectedFile = fileChooser.getSelectedFile();
             return selectedFile;
         } else {
-            return null;
+            return null; //If null is returned, it is handled in Life.load()
         }
     }
 }
