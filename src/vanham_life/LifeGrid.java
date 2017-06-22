@@ -150,6 +150,7 @@ public class LifeGrid extends JPanel {
      */
     public void load() {
         game.load();
+        game.saveTemp();
         repaint();
     }
     
