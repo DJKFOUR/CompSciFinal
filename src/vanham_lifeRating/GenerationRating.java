@@ -54,7 +54,7 @@ public class GenerationRating implements ActionListener {
         contentPane.add(scroll);
 
         load = new JButton("Load a file");
-        load.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        load.setFont(new Font("Century Gothic", Font.BOLD, 12));
         load.setBackground(GRAY);
         load.setForeground(TEAL);
         load.setBorderPainted(false);
@@ -64,7 +64,7 @@ public class GenerationRating implements ActionListener {
         controls.add(load);
 
         rate = new JButton("Rate Generations");
-        rate.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        rate.setFont(new Font("Century Gothic", Font.BOLD, 12));
         rate.setBackground(GRAY);
         rate.setForeground(TEAL);
         rate.setBorderPainted(false);

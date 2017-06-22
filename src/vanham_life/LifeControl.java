@@ -22,6 +22,7 @@ public class LifeControl extends JPanel {
     private static final Color GRAY = new Color(100, 100, 100);
     private static final Color TEAL = new Color(0, 250, 200);
     private static final Color PURPLE = new Color(182, 66, 244);
+    private static Color GUI_COLOUR = TEAL;
     
     /**
      * Constructor - Creates and initializes the control panel
@@ -42,9 +43,9 @@ public class LifeControl extends JPanel {
         buttons.setOpaque(false);
 
         save = new JButton("Save");
-        save.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        save.setFont(new Font("Century Gothic", Font.BOLD, 14));
         save.setBackground(GRAY);
-        save.setForeground(TEAL);
+        save.setForeground(GUI_COLOUR);
         save.setBorderPainted(false);
         save.setFocusPainted(false);
         save.addActionListener(new BtnListener());
@@ -52,9 +53,9 @@ public class LifeControl extends JPanel {
         buttons.add(save);
 
         load = new JButton("Load");
-        load.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        load.setFont(new Font("Century Gothic", Font.BOLD, 14));
         load.setBackground(GRAY);
-        load.setForeground(TEAL);
+        load.setForeground(GUI_COLOUR);
         load.setBorderPainted(false);
         load.setFocusPainted(false);
         load.addActionListener(new BtnListener());
@@ -62,9 +63,9 @@ public class LifeControl extends JPanel {
         buttons.add(load);
 
         step = new JButton("Take Step");
-        step.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        step.setFont(new Font("Century Gothic", Font.BOLD, 14));
         step.setBackground(GRAY);
-        step.setForeground(TEAL);
+        step.setForeground(GUI_COLOUR);
         step.setBorderPainted(false);
         step.setFocusPainted(false);
         step.addActionListener(new BtnListener());
@@ -72,9 +73,9 @@ public class LifeControl extends JPanel {
         buttons.add(step);
 
         clear = new JButton("Clear Grid");
-        clear.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        clear.setFont(new Font("Century Gothic", Font.BOLD, 14));
         clear.setBackground(GRAY);
-        clear.setForeground(TEAL);
+        clear.setForeground(GUI_COLOUR);
         clear.setBorderPainted(false);
         clear.setFocusPainted(false);
         clear.addActionListener(new BtnListener());
@@ -82,9 +83,9 @@ public class LifeControl extends JPanel {
         buttons.add(clear);
 
         run = new JButton("Run");
-        run.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        run.setFont(new Font("Century Gothic", Font.BOLD, 14));
         run.setBackground(GRAY);
-        run.setForeground(TEAL);
+        run.setForeground(GUI_COLOUR);
         run.setBorderPainted(false);
         run.setFocusPainted(false);
         run.addActionListener(new BtnListener());
@@ -92,9 +93,9 @@ public class LifeControl extends JPanel {
         buttons.add(run);
 
         recall = new JButton("Recall");
-        recall.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        recall.setFont(new Font("Century Gothic", Font.BOLD, 14));
         recall.setBackground(GRAY);
-        recall.setForeground(TEAL);
+        recall.setForeground(GUI_COLOUR);
         recall.setBorderPainted(false);
         recall.setFocusPainted(false);
         recall.addActionListener(new BtnListener());
@@ -161,7 +162,7 @@ public class LifeControl extends JPanel {
         counter.setOpaque(false);
         
         generationCounter = new JLabel("Generation: " + generationNum);
-        generationCounter.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+        generationCounter.setFont(new Font("Century Gothic", Font.BOLD, 14));
         generationCounter.setForeground(TEAL);
         counter.add(generationCounter);
         
@@ -207,7 +208,6 @@ public class LifeControl extends JPanel {
                     timer.start();
                     recall.setVisible(false);
                     run.setText("STOP");
-                    run.setFont(new Font("Century Gothic", Font.BOLD, 12));
                     run.setBackground(Color.RED);
                     run.setForeground(Color.BLACK);
                     run.setActionCommand("stop"); //Set button to stop timer
@@ -218,9 +218,8 @@ public class LifeControl extends JPanel {
                     recall.show();
                     timer.stop();
                     run.setText("Run");
-                    run.setFont(new Font("Century Gothic", Font.PLAIN, 12));
                     run.setBackground(GRAY);
-                    run.setForeground(TEAL);
+                    run.setForeground(GUI_COLOUR);
                     run.setActionCommand("run"); //Set button to start timer
                                                  //instead of stop
                     System.out.println("Timer Running: " + timer.isRunning());
@@ -231,27 +230,48 @@ public class LifeControl extends JPanel {
                     generationCounter.setText("Generation: " + generationNum);
                     break;
                 case "red":
-                    grid.setColour(Color.RED);
+                    changeGUIColor(Color.RED);
                     break;
                 case "orange":
-                    grid.setColour(Color.ORANGE);
+                    changeGUIColor(Color.ORANGE);
                     break;
                 case "yellow":
-                    grid.setColour(Color.YELLOW);
+                    changeGUIColor(Color.YELLOW);
                     break;
                 case "green":
-                    grid.setColour(Color.GREEN);
+                    changeGUIColor(Color.GREEN);
                     break;
                 case "teal":
-                    grid.setColour(TEAL);
+                    changeGUIColor(TEAL);
                     break;
                 case "blue":
-                    grid.setColour(Color.BLUE);
+                    changeGUIColor(Color.BLUE);
                     break;
                 case "purple":
-                    grid.setColour(PURPLE);
+                    changeGUIColor(PURPLE);
                     break;
             }
+        }
+        
+        /**
+         * Sets the color of the GUI(All buttons and colored features)
+         * 
+         * Pre: a Color object
+         * Post: GUI color has been updated
+         * 
+         * @param c = Color Object to use as the GUI Color
+         */
+        private void changeGUIColor(Color c) {
+            GUI_COLOUR = c;
+            grid.setColour(GUI_COLOUR);
+            generationCounter.setForeground(GUI_COLOUR);
+            setBorder(new CompoundBorder(new TitledBorder(new LineBorder(GUI_COLOUR, 3, true), "MENU", TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION, new Font("Century Gothic", Font.BOLD, 14), GUI_COLOUR), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+            save.setForeground(GUI_COLOUR);
+            load.setForeground(GUI_COLOUR);
+            step.setForeground(GUI_COLOUR);
+            clear.setForeground(GUI_COLOUR);
+            run.setForeground(GUI_COLOUR);
+            recall.setForeground(GUI_COLOUR);
         }
     }
 
@@ -272,9 +292,8 @@ public class LifeControl extends JPanel {
                     timer.stop();
                     recall.setVisible(true);
                     run.setText("Run");
-                    run.setFont(new Font("Century Gothic", Font.PLAIN, 12));
                     run.setBackground(GRAY);
-                    run.setForeground(TEAL);
+                    run.setForeground(GUI_COLOUR);
                     run.setActionCommand("run");
                     System.out.println("Timer Running: " + timer.isRunning());
                     generationNum = 999;
@@ -288,9 +307,8 @@ public class LifeControl extends JPanel {
                 timer.stop();
                 recall.setVisible(true);
                 run.setText("Run");
-                run.setFont(new Font("Century Gothic", Font.PLAIN, 12));
                 run.setBackground(GRAY);
-                run.setForeground(TEAL);
+                run.setForeground(GUI_COLOUR);
                 run.setActionCommand("run");
                 System.out.println("Timer Running: " + timer.isRunning());
             }
