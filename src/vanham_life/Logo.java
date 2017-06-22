@@ -12,7 +12,7 @@ import javax.swing.*;
  * @author vanhk5054
  */
 public class Logo extends JPanel {
-    private JLabel logo;
+    private final JLabel logo;
     
     /**
      * Constructor - Initializes and creates a logo image in the form of a

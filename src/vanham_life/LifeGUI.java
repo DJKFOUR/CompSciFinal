@@ -9,13 +9,13 @@ import javax.swing.*;
  */
 public class LifeGUI {
 
-    private ImageIcon imageIcon = new ImageIcon("logo.png");
-    private JPanel contentPane = new JPanel();
-    private LifeGrid gameGrid = new LifeGrid();
-    private Logo logo = new Logo();
-    private LifeControl gameControl = new LifeControl(gameGrid);
-    private JPanel right = new JPanel();
-    private JFrame frame = new JFrame("LIFE");
+    private final ImageIcon imageIcon = new ImageIcon("logo.png");
+    private final JPanel contentPane = new JPanel();
+    private final LifeGrid gameGrid = new LifeGrid();
+    private final Logo logo = new Logo();
+    private final LifeControl gameControl = new LifeControl(gameGrid);
+    private final JPanel right = new JPanel();
+    private final JFrame frame = new JFrame("LIFE");
 
     /**
      * Creates initializes a LifeGUI object
@@ -56,6 +56,7 @@ public class LifeGUI {
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 runGUI();
             }

@@ -11,7 +11,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class SaveLoadManager {
 
     private static JFileChooser fileChooser;
-    private static final FileNameExtensionFilter filter = new FileNameExtensionFilter("Life file", new String[]{"life"});
+    private static final FileNameExtensionFilter FILTER = new FileNameExtensionFilter("Life file", new String[]{"life"});
     private static int[][] loadedGrid;
     
     /**
@@ -69,6 +69,9 @@ public class SaveLoadManager {
         } catch (IOException e) {
             System.out.println("Problem with input/output.");
             System.err.println("IOException: " + e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("Null pointer exception.");
+            System.err.println("IOException: " + e.getMessage());
         }
     }
     
@@ -105,6 +108,9 @@ public class SaveLoadManager {
             System.out.println("Class could not be used to cast object.");
             System.err.println("ClassNotFoundException: "
                     + e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("Null pointer exception.");
+            System.err.println("IOException: " + e.getMessage());
         }
         return loadedGrid;
     }
@@ -120,8 +126,8 @@ public class SaveLoadManager {
     private static File getSaveFile() {
         int returnValue;
         fileChooser = new JFileChooser();
-        fileChooser.setFileFilter(filter);
-        fileChooser.addChoosableFileFilter(filter);
+        fileChooser.setFileFilter(FILTER);
+        fileChooser.addChoosableFileFilter(FILTER);
         fileChooser.setAcceptAllFileFilterUsed(false);
         returnValue = fileChooser.showSaveDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -149,8 +155,8 @@ public class SaveLoadManager {
     private static File getLoadFile() {
         int returnValue;
         fileChooser = new JFileChooser();
-        fileChooser.setFileFilter(filter);
-        fileChooser.addChoosableFileFilter(filter);
+        fileChooser.setFileFilter(FILTER);
+        fileChooser.addChoosableFileFilter(FILTER);
         fileChooser.setAcceptAllFileFilterUsed(false);
         returnValue = fileChooser.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {

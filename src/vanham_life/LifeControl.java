@@ -11,14 +11,14 @@ import javax.swing.border.*;
  */
 public class LifeControl extends JPanel {
 
-    private LifeGrid grid;
-    private JPanel buttons = new JPanel();
-    private JPanel counter = new JPanel();
-    private JButton save, load, step, clear, run, recall;
-    private JButton red, orange, yellow, green, blue, purple, teal;
-    private JLabel generationCounter;
+    private final LifeGrid grid;
+    private final JPanel buttons = new JPanel();
+    private final JPanel counter = new JPanel();
+    private final JButton save, load, step, clear, run, recall;
+    private final JButton red, orange, yellow, green, blue, purple, teal;
+    private final JLabel generationCounter;
     private int generationNum = 0;
-    private Timer timer = new Timer(250, new TimerListener());
+    private final Timer timer = new Timer(250, new TimerListener());
     private static final Color GRAY = new Color(100, 100, 100);
     private static final Color TEAL = new Color(0, 250, 200);
     private static final Color PURPLE = new Color(182, 66, 244);
@@ -200,7 +200,7 @@ public class LifeControl extends JPanel {
                 case "clear":
                     grid.clear();
                     generationNum = 0;
-                    generationCounter.setText(" ");
+                    generationCounter.setText("Generation: " + generationNum);
                     System.out.println("Grid Cleared");
                     break;
                 case "run":

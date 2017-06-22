@@ -9,18 +9,18 @@ import vanham_life.Life;
 
 public class GenerationRating implements ActionListener {
 
-    private ImageIcon imageIcon = new ImageIcon("logo.png");
-    private Life game = new Life(20, false);
-    private JFrame frame = new JFrame("Life File Generation Rating");
-    private JPanel contentPane = new JPanel();
-    private JPanel controls = new JPanel();
-    private JButton load, rate;
-    private JTextArea list;
-    private JScrollPane scroll;
+    private final ImageIcon imageIcon = new ImageIcon("logo.png");
+    private final Life game = new Life(20, false);
+    private final JFrame frame = new JFrame("Life File Generation Rating");
+    private final JPanel contentPane = new JPanel();
+    private final JPanel controls = new JPanel();
+    private final JButton load, rate;
+    private final JTextArea list;
+    private final JScrollPane scroll;
     private static final Color GRAY = new Color(100, 100, 100);
     private static final Color TEAL = new Color(0, 250, 200);
     private static int generationNum = 0;
-    private ArrayList gens = new <Generation>ArrayList();
+    private final ArrayList gens = new <Generation>ArrayList();
     
     /**
      * Constructor - Creates and initializes a GenerationRating Object
@@ -139,6 +139,7 @@ public class GenerationRating implements ActionListener {
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 runGUI();
             }
