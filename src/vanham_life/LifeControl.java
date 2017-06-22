@@ -36,7 +36,7 @@ public class LifeControl extends JPanel {
         this.grid = grid;
         
         setOpaque(false);
-        setBorder(new CompoundBorder(new TitledBorder(new LineBorder(TEAL, 3, true), "MENU", TitledBorder.CENTER,TitledBorder.DEFAULT_POSITION, new Font("Century Gothic", Font.PLAIN, 12), TEAL), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
+        setBorder(new CompoundBorder(new TitledBorder(new LineBorder(TEAL, 3, true), "MENU", TitledBorder.CENTER,TitledBorder.DEFAULT_POSITION, new Font("Century Gothic", Font.PLAIN, 14), TEAL), BorderFactory.createEmptyBorder(5, 5, 5, 5)));
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         
         buttons.setLayout(new GridLayout(0, 2, 10, 10));
